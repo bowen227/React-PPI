@@ -17,7 +17,10 @@ class Navigation extends Component {
 
         return(
             <Navbar color="dark" dark expand="md">
-            <NavbarBrand href="/">PPI-LOGO Here</NavbarBrand>
+            <NavbarBrand href="/">
+              <img src="./assets/images/PPI_logo_blue.png" width="50px" height="auto"></img>
+              Player Power Index
+            </NavbarBrand>
             <NavbarToggler onClick={() => this.toggle(this.state.isOpen)} />
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
