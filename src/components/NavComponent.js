@@ -16,7 +16,7 @@ class Navigation extends Component {
     render() {
 
         return(
-            <Navbar color="dark" dark expand="md">
+            <Navbar className="sticky-top" color="dark" dark expand="md">
             <NavbarBrand href="/">
               <img src="./assets/images/PPI_logo_blue.png" width="50px" height="auto"></img>
               Player Power Index

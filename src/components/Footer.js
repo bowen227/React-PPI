@@ -13,7 +13,7 @@ class Footer extends Component {
                 <div className="p-5"></div>
                 <div className="p-5"></div>
                 </div>
-                <Jumbotron fluid>
+                <Jumbotron fluid className="m-0">
                     <Container fluid>
                         <div className="social-icons"></div>
                         <p>Created by: Brent Owen</p>

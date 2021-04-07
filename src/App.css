@@ -3,9 +3,5 @@ body {
 }
 
 #hero {
-  height: 100vh;
-}
-
-.jumbotron {
-  margin: none;
+  height: 90vh;
 }
