@@ -4,9 +4,9 @@ class Hero extends Component {
 
     render() {
         return(
-            <div className="container">
-                <div className="p-5"></div>
-                <div className="p-md-5"></div>
+            <div id="hero" className="container d-flex align-items-center">
+                {/* <div className="p-5"></div>
+                <div className="p-md-5"></div> */}
                 <div className="row align-items-center">
                     <div className="col-md-6 text-left">
                         <h1>A better way to evaluate baseball players</h1>
