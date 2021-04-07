@@ -5,3 +5,7 @@ body {
 #hero {
   height: 90vh;
 }
+
+.login-container {
+  height: 80vh;
+}

@@ -1,9 +1,8 @@
-import { useState } from 'react';
+
 import './App.css';
 import Navigation from './components/NavComponent';
-import Hero from './components/HeroComponent';
-import Association from './components/AssociationComponent';
-import Coaches from './components/CoachesComponent';
+import Home from './views/HomeComponent';
+import Login from './views/LoginComponent';
 import Footer from './components/FooterComponent';
 
 function App() {
@@ -11,9 +10,8 @@ function App() {
   return (
     <div className="App">
       <Navigation />
-      <Hero />
-      <Association />
-      <Coaches />
+      <Home />
+      {/* <Login /> */}
       <Footer />
     </div>
   );
