@@ -4,6 +4,7 @@ import Navigation from './components/NavComponent';
 import Hero from './components/HeroComponent';
 import Association from './components/Association';
 import Coaches from './components/Coaches';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Association />
       <Coaches />
+      <Footer />
     </div>
   );
 }
