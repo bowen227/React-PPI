@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from './components/NavComponent';
 import Hero from './components/HeroComponent';
 import Association from './components/Association';
+import Coaches from './components/Coaches';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Navigation />
       <Hero />
       <Association />
+      <Coaches />
     </div>
   );
 }
