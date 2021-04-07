@@ -2,9 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Navigation from './components/NavComponent';
 import Hero from './components/HeroComponent';
-import Association from './components/Association';
-import Coaches from './components/Coaches';
-import Footer from './components/Footer';
+import Association from './components/AssociationComponent';
+import Coaches from './components/CoachesComponent';
+import Footer from './components/FooterComponent';
 
 function App() {
 
