@@ -9,3 +9,14 @@ body {
 .login-container {
   height: 80vh;
 }
+
+.player-list:hover {
+  cursor: pointer;
+  background-color: #343a40;
+  color: #fff;
+}
+
+.default-user-img {
+  width: 40px;
+  height: auto;
+}
