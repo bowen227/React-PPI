@@ -4,9 +4,6 @@ import Association from '../components/AssociationComponent';
 import Coaches from '../components/CoachesComponent';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return(

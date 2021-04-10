@@ -2,9 +2,6 @@ import { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return(

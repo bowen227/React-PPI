@@ -13,8 +13,6 @@ class Navigation extends Component {
         this.setState({isOpen: !open})
     }
 
-
-
     render() {
 
         return(
