@@ -4,6 +4,7 @@ import { PLAYERS } from '../shared/players';
 import Schedule from '../components/ScheduleComponent';
 import { SCHEDULE } from '../shared/schedule';
 import PlayerList from '../components/PlayerListComponent';
+import EvalModal from '../components/EvalModalComponent';
 
 class Dashboard extends Component {
     constructor() {
@@ -38,6 +39,7 @@ class Dashboard extends Component {
                         <PlayerList players={this.state.players} />
                     </ListGroup>
                 </div>
+                <EvalModal />
             </div>
         )
     }
