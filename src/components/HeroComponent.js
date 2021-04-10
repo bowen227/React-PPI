@@ -15,7 +15,7 @@ class Hero extends Component {
                         <button className="btn btn-outline-dark">Sign Up</button>
                     </div>
                     <div className="col my-2">
-                        <img src="./assets/images/baseball_1.jpeg" width="100%" height="auto"></img>
+                        <img src="./assets/images/baseball_1.jpeg" width="100%" height="auto" alt="Baseball glove in grass with baseballs laying around"></img>
                     </div>
                 </div>
             </div>

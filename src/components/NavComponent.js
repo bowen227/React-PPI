@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Navbar, NavbarBrand, Collapse, Nav, NavItem, NavLink, DropdownToggle, DropdownMenu, DropdownItem, NavbarToggler } from 'reactstrap';
+import { Navbar, NavbarBrand, Collapse, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap';
 
 class Navigation extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Navigation extends Component {
         return(
             <Navbar className="sticky-top" color="dark" dark expand="md">
             <NavbarBrand href="/">
-              <img src="./assets/images/PPI_logo_blue.png" width="50px" height="auto"></img>
+              <img src="./assets/images/PPI_logo_blue.png" width="50px" height="auto" alt="PPI Logo"></img>
               Player Power Index
             </NavbarBrand>
             <NavbarToggler onClick={() => this.toggle(this.state.isOpen)} />
