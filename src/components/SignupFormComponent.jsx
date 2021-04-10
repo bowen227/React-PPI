@@ -2,10 +2,13 @@ import { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-class LoginForm extends Component {
+class SignupForm extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
-        return(
+        return (
             <div className="container login-container">
                 <div className="row align-items-center justify-content-center">
                     <div className="col-md-6 align-items-center p-5 h-80">
@@ -19,9 +22,13 @@ class LoginForm extends Component {
                                 <Label for="password">Password</Label>
                                 <Input type="password" name="password" id="password" placeholder="Enter Password" />
                             </FormGroup>
-                            <Button className="btn btn-outline">Login</Button>
+                            <FormGroup>
+                                <Label for="confirmPassword">Confirm Password</Label>
+                                <Input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" />
+                            </FormGroup>
+                            <Button className="btn btn-outline">Sign Up</Button>
                         </Form>
-                        <span>Don't have an account? <Link to="/signup">Create Account</Link></span>
+                        <span>Already have an account? <Link to="/login">Login</Link></span>
                     </div>
                 </div>
             </div>
@@ -29,4 +36,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default SignupForm;

@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import SignupForm from '../components/SignupFormComponent';
 
 class Signup extends Component {
     constructor(props) {
@@ -7,9 +8,7 @@ class Signup extends Component {
 
     render() {
         return(
-            <>
-                signup works
-            </>
+            <SignupForm />
         )
     }
 }
