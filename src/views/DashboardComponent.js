@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { ListGroup } from 'reactstrap';
 import { PLAYERS } from '../shared/players';
+import Schedule from '../components/ScheduleComponent';
+import { SCHEDULE } from '../shared/schedule';
 import PlayerList from '../components/PlayerListComponent';
 
 class Dashboard extends Component {
@@ -11,7 +13,8 @@ class Dashboard extends Component {
             players: PLAYERS,
             team: null,
             association: null,
-            league: null
+            league: null,
+            schedule: SCHEDULE
         }
     }
 
@@ -24,10 +27,13 @@ class Dashboard extends Component {
                         <span>{this.state.league ? this.state.league : 'No league selected'}</span>
                     </div>
                     <div className="col">
-                        ScheduleComponent goes here
+                        <h3>Upcoming Events</h3>
+                        <ListGroup flush >
+                            <Schedule schedule={this.state.schedule} />
+                        </ListGroup>
                     </div>
                 </div>
-                <div className="row py-5">
+                <div className="row pt-5">
                     <ListGroup flush className="w-100">
                         <PlayerList players={this.state.players} />
                     </ListGroup>
