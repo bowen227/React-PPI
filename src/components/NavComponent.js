@@ -13,6 +13,8 @@ class Navigation extends Component {
         this.setState({isOpen: !open})
     }
 
+
+
     render() {
 
         return(
@@ -25,10 +27,10 @@ class Navigation extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                      <NavLink href="/">For Associations</NavLink>
+                      <NavLink href="#association">For Associations</NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="/">For Coaches</NavLink>
+                      <NavLink href="#coaches">For Coaches</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href="/">Login</NavLink>
