@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Navbar, NavbarBrand, Collapse, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Navigation extends Component {
                       <NavLink href="#coaches">For Coaches</NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href="/">Login</NavLink>
+                      <NavLink href="/login">Login</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>

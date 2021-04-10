@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Hero extends Component {
 
@@ -12,7 +13,7 @@ class Hero extends Component {
                             Generate a Player Power Index for tryouts, camps and player development. Save time drafting players and creating 
                             balanced teams.
                         </p>
-                        <button className="btn btn-outline-dark">Sign Up</button>
+                        <Link className="btn btn-outline-dark" to="/signup">Sign Up</Link>
                     </div>
                     <div className="col my-2">
                         <img src="./assets/images/baseball_1.jpeg" width="100%" height="auto" alt="Baseball glove in grass with baseballs laying around"></img>
