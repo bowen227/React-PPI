@@ -6,18 +6,33 @@ import Login from './views/LoginComponent';
 import Signup from './views/SignupComponent';
 import Footer from './components/FooterComponent';
 import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 
-function App() {
+function App(props) {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  function login() {
+    setLoggedIn(!isLoggedIn);
+    this.props.history.push("/dashboard");
+  }
   
   return (
     <div className="App">
       <Router>
-          <Navigation />
+          <Navigation isLoggedIn={isLoggedIn} />
         <Switch>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/login" exact component={Login}></Route>
-          <Route path="/dashboard" exact component={Dashboard}></Route>
-          <Route path="/signup" exact component={Signup}></Route>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/login" exact>
+            <Login login={login} />
+          </Route>
+          <Route path="/dashboard" exact>
+            <Dashboard />
+          </Route>
+          <Route path="/signup" exact>
+            <Signup />
+          </Route>
         </Switch>
       </Router>
       <Footer />

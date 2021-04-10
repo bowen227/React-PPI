@@ -24,6 +24,7 @@ class Navigation extends Component {
             </NavbarBrand>
             <NavbarToggler onClick={() => this.toggle(this.state.isOpen)} />
             <Collapse isOpen={this.state.isOpen} navbar>
+              {!this.props.isLoggedIn ? 
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                       <NavLink href="#association">For Associations</NavLink>
@@ -34,7 +35,13 @@ class Navigation extends Component {
                     <NavItem>
                       <NavLink href="/login">Login</NavLink>
                     </NavItem>
+                </Nav> :
+                <Nav className="ml-auto" navbar>
+                  <NavItem>
+                    <NavLink href="/">Profile</NavLink>
+                  </NavItem>
                 </Nav>
+              }
             </Collapse>
           </Navbar>
         )
