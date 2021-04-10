@@ -5,13 +5,12 @@ class EvalModal extends Component {
     constructor(props) {
         super(props);
 
-        const state = {
-            modal: false,
-            evalModal: false
+        this.state = {
+            modal: true
         }
     }
 
-    toggle = () => this.setState({modal: true});
+    toggle = () => this.setState({modal: !this.state.modal});
 
     render() {
         return (
