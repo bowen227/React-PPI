@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup } from 'reactstrap';
 import { PLAYERS } from '../shared/players';
 import PlayerList from '../components/PlayerListComponent';
 
@@ -8,7 +8,10 @@ class Dashboard extends Component {
         super();
 
         this.state = {
-            players: PLAYERS
+            players: PLAYERS,
+            team: null,
+            association: null,
+            league: null
         }
     }
 
@@ -17,7 +20,8 @@ class Dashboard extends Component {
             <div className='container py-5'>
                 <div className="row">
                     <div className="col">
-                        team/association info goes here. coaches, league, w/l etc...
+                        <h2>{this.state.team ? this.state.team : 'No team selected'}</h2>
+                        <span>{this.state.league ? this.state.league : 'No league selected'}</span>
                     </div>
                     <div className="col">
                         ScheduleComponent goes here

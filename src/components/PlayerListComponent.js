@@ -6,13 +6,17 @@ class PlayerList extends Component {
         super(props);
     }
 
+    goToDetails(id) {
+        console.log(`Go to player ${id} details`);
+    }
+
     render() {
         const player = this.props.players.map(player => {
             return (
-                <ListGroupItem key={player.id} className="player-list">
+                <ListGroupItem key={player.id} className="player-list" onClick={() => this.goToDetails(player.id)}>
                     <div className="row justify-content-center">
                         <div className="col-1">
-                            <img className="default-user-img" src="./assets/images/default_user.png"></img>
+                            <img className="default-user-img" src="./assets/images/default_user.png" alt="player profile image"></img>
                         </div>
                         <div className="col-4 d-flex align-items-center">
                             {player.firstName + ' ' + player.lastName}
