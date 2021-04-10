@@ -8,6 +8,7 @@ class Association extends Component {
     render() {
         return(
             <div id="association" className="container text-left p-5">
+                <div className="p-5"></div>
                 <div className="p-md-5"></div>
                 <h2 className="py-4">Associations</h2>
                 <div className="row">
