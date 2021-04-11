@@ -1,17 +1,33 @@
 import { Component } from 'react';
-import { Navbar, NavbarBrand, Collapse, Nav, NavItem, NavLink, NavbarToggler } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { 
+  Navbar, 
+  NavbarBrand, 
+  Collapse, 
+  Nav, 
+  NavItem, 
+  NavLink, 
+  NavbarToggler,
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  DropdownMenu,
+  Button } from 'reactstrap';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            dropDownOpen: false
         }
     }
 
     toggle(open) {
         this.setState({isOpen: !open})
+    }
+
+    toggleDropDown() {
+      this.setState({dropDownOpen: !this.state.dropDownOpen});
     }
 
     render() {
@@ -37,12 +53,16 @@ class Navigation extends Component {
                     </NavItem>
                 </Nav> :
                 <Nav className="ml-auto" navbar>
-                  <NavItem>
-                    <NavLink href="/">Profile</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Log Out</NavLink>
-                  </NavItem>
+                  <Dropdown nav isOpen={this.state.dropDownOpen} toggle={() => this.toggleDropDown()}>
+                    <DropdownToggle nav caret>Menu</DropdownToggle>
+                    <DropdownMenu className="dropDown">
+                      <DropdownItem>Profile</DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem>
+                        <button className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Sign Out</button>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
                 </Nav>
               }
             </Collapse>

@@ -8,7 +8,7 @@ class Footer extends Component {
             <div>
                 <div className="p-5">
                 <div className="p-5"></div>
-                <div className="p-5"></div>
+                <div className="p-md-5"></div>
                 </div>
                 <Jumbotron fluid className="m-0">
                     <Container fluid>
