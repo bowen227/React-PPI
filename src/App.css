@@ -14,7 +14,12 @@ body {
   height: 80vh;
 }
 
+.player-list {
+  color: black;
+}
+
 .player-list:hover {
+  text-decoration: none;
   cursor: pointer;
   background-color: #343a40;
   color: #fff;

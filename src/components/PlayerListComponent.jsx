@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { ListGroupItem } from 'reactstrap';
 
 class PlayerList extends Component {
@@ -6,14 +7,10 @@ class PlayerList extends Component {
         super(props);
     }
 
-    goToDetails(id) {
-        console.log(`Go to player ${id} details`);
-    }
-
     render() {
         const player = this.props.players.map(player => {
             return (
-                <ListGroupItem key={player.id} className="player-list" onClick={() => this.goToDetails(player.id)}>
+                <Link key={player.id} className="list-group-item player-list" to={`/playerDetails/${player.id}`}>
                     <div className="row justify-content-center p-1">
                         <div className="col-xs-2">
                             <img className="default-user-img" src="./assets/images/default_user.png" alt="player profile image"></img>
@@ -34,10 +31,10 @@ class PlayerList extends Component {
                             0.00
                         </div>
                     </div>
-                </ListGroupItem>
+                </Link>
             );
         });
-        return(
+        return (
             <>{player}</>
         );
     }
