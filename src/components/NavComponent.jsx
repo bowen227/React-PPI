@@ -40,6 +40,9 @@ class Navigation extends Component {
                   <NavItem>
                     <NavLink href="/">Profile</NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Log Out</NavLink>
+                  </NavItem>
                 </Nav>
               }
             </Collapse>

@@ -5,6 +5,7 @@ import Schedule from '../components/ScheduleComponent';
 import { SCHEDULE } from '../shared/schedule';
 import PlayerList from '../components/PlayerListComponent';
 import EvalModal from '../components/EvalModalComponent';
+import { Redirect } from 'react-router';
 
 class Dashboard extends Component {
     constructor() {
@@ -20,6 +21,9 @@ class Dashboard extends Component {
     }
 
     render() {
+        if (!this.props.isLoggedIn) {
+            return <Redirect to="/" />
+        }
         return(
             <div className='container py-5'>
                 <div className="row">

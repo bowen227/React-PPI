@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Redirect } from 'react-router';
 import LoginForm from '../components/LoginFormComponent';
 
 class Login extends Component {
@@ -7,10 +8,11 @@ class Login extends Component {
     }
 
     render() {
+        if (this.props.isLoggedIn) {
+            return <Redirect to="/dashboard" />
+        }
         return (
-            <>
-                <LoginForm login={this.props.login} />
-            </>
+            <LoginForm login={this.props.login} />
         )
     }
 }
