@@ -32,7 +32,6 @@ class Navigation extends Component {
     }
 
     render() {
-
         return (
             <Navbar className="sticky-top" color="dark" dark expand="md">
                 <NavbarBrand href="/">

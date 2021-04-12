@@ -12,13 +12,7 @@ class PlayerDetails extends Component {
 
         this.state = {
             // playerId: props.match.params.id,
-            selectedPlayer: PLAYERS.map(player => {
-                if (player.id == props.match.params.id) {
-                    const p = [];
-                    p.push(p.firstName, p.lastName, p.throws, p.bats, p.group);
-                    return p;
-                }
-            }),
+            player: PLAYERS[props.match.params.id - 1],
             modal: false
         }
         this.toggle = this.toggle.bind(this);
@@ -32,15 +26,14 @@ class PlayerDetails extends Component {
                 <Row className="py-3">
                     <Col className="text-right">
                         <button className="btn btn-outline-dark" onClick={() => this.props.history.goBack()}>Back</button>
-                        {this.state.selectedPlayer[0]}
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        <PlayerCard />
+                    <Col md="6" className="my-2">
+                        <PlayerCard player={this.state.player} />
                         <Button className="mt-2" outline color='danger' onClick={this.toggle}>Evaluate</Button>
                     </Col>
-                    <Col>
+                    <Col className="my-2">
                         <PastEvals />
                     </Col>
                 </Row>

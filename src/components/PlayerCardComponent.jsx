@@ -7,23 +7,39 @@ class PlayerCard extends Component {
     }
 
     render() {
-        return(
+        return (
             <Card>
                 <CardHeader>
                     <Row className="align-items-center">
-                        <Col xs='2'>
-                            Player Image
+                        <Col xs='3'>
+                            <img class="w-100" src="../assets/images/default_user.png" alt="Player profile image"></img>
                         </Col>
                         <Col>
-                            Player Name
+                            <h3 className="m-0">{this.props.player.firstName + " " + this.props.player.lastName}</h3>
                         </Col>
                     </Row>
                 </CardHeader>
                 <CardBody>
-                    Group:
-                    Bats:
-                    Throws:
-                    PPI:
+                    <Row className="flex-nowrap">
+                        <Col>
+                            <h5>Group</h5>
+                        </Col>
+                        <Col>
+                            <h5>Bats</h5>
+                        </Col>
+                        <Col>
+                            <h5>Throws</h5>
+                        </Col>
+                        <Col>
+                            <h5>PPI</h5>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>{this.props.player.group}</Col>
+                        <Col>{this.props.player.bats}</Col>
+                        <Col>{this.props.player.throws}</Col>
+                        <Col>0.00</Col>
+                    </Row>
                 </CardBody>
             </Card>
         )
