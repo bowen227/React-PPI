@@ -6,12 +6,44 @@ body {
   font-family: "montserrat";
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 #hero {
   height: 90vh;
 }
 
 .login-container {
   height: 80vh;
+}
+
+.players-list-container {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 700px;
+}
+
+.coaches-list-container {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 700px;
 }
 
 .player-list {

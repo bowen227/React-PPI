@@ -6,6 +6,7 @@ import Schedule from '../components/ScheduleComponent';
 import { SCHEDULE } from '../shared/schedule';
 import PlayerList from '../components/PlayerListComponent';
 import NewEvent from '../components/NewEventModalComponent';
+import CoachList from '../components/CoachListComponent';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Dashboard extends Component {
 
         this.state = {
             players: PLAYERS,
+            coaches: null,
             team: null,
             association: null,
             league: null,
@@ -55,13 +57,27 @@ class Dashboard extends Component {
                     <button className="btn btn-outline-dark m-2">Add Coach</button>
                 </Row>
                 <Row className="pt-5">
-                    <Col md="6" className="pr-md-3">
-                        <ListGroup flush className="w-100">
-                            <PlayerList players={this.state.players} />
-                        </ListGroup>
+                    <Col md="6" className="pr-md-3 players-list-container">
+                        <h3>Player List</h3>
+                        {this.state.players ? 
+                            <ListGroup flush className="w-100">
+                                <PlayerList players={this.state.players} />
+                            </ListGroup>
+                            :
+                            <div>No Players to display</div>
+                        }
+
                     </Col>
-                    <Col md="6" className="pl-md-3">
-                        Coach list goes here
+                    <Col md="6" className="pl-md-3 coaches-list-container">
+                        <h3>Coaches List</h3>
+                        {this.state.coaches ?
+                            <ListGroup flush className="w-100">
+                                <CoachList coaches={this.state.coaches} />
+                            </ListGroup>
+                            :
+                            <div>No Coaches to display</div>
+                    }
+
                     </Col>
                 </Row>
                 <NewEvent toggle={this.toggle} isOpen={this.state.modal} />
