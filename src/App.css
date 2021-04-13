@@ -33,3 +33,12 @@ body {
 .dropDown {
   left: -40px !important;
 }
+
+.nav-link a {
+  color: #ffffff80;
+}
+
+.nav-link a:hover {
+  text-decoration: none;
+  color: #ffffffce;
+}

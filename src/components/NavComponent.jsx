@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Navbar,
     NavbarBrand,
@@ -49,20 +50,20 @@ class Navigation extends Component {
                                 <NavLink href="#coaches">For Coaches</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/login">Login</NavLink>
+                                <NavLink>
+                                    <Link to="/login">Login</Link>
+                                </NavLink>
                             </NavItem>
                         </Nav> :
-                        <Nav className="ml-auto" navbar>
-                            <Dropdown nav isOpen={this.state.dropDownOpen} toggle={() => this.toggleDropDown()}>
-                                <DropdownToggle nav caret>Menu</DropdownToggle>
-                                <DropdownMenu className="dropDown">
-                                    <DropdownItem>Profile</DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>
-                                        <button className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Sign Out</button>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                        <Nav className="ml-auto align-items-center" navbar>
+                            <NavItem>
+                                <NavLink href="#">Profile</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink>
+                                    <button className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Sign Out</button>
+                                </NavLink>
+                            </NavItem>
                         </Nav>
                     }
                 </Collapse>

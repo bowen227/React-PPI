@@ -8,8 +8,8 @@ import PlayerList from '../components/PlayerListComponent';
 import NewEvent from '../components/NewEventModalComponent';
 
 class Dashboard extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             players: PLAYERS,
@@ -50,10 +50,19 @@ class Dashboard extends Component {
                         </ListGroup>
                     </Col>
                 </Row>
+                <Row className="d-flex">
+                    <button className="btn btn-outline-dark m-2">Add Player</button>
+                    <button className="btn btn-outline-dark m-2">Add Coach</button>
+                </Row>
                 <Row className="pt-5">
-                    <ListGroup flush className="w-100">
-                        <PlayerList players={this.state.players} />
-                    </ListGroup>
+                    <Col md="6" className="pr-md-3">
+                        <ListGroup flush className="w-100">
+                            <PlayerList players={this.state.players} />
+                        </ListGroup>
+                    </Col>
+                    <Col md="6" className="pl-md-3">
+                        Coach list goes here
+                    </Col>
                 </Row>
                 <NewEvent toggle={this.toggle} isOpen={this.state.modal} />
             </Container>

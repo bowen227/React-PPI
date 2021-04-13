@@ -2,19 +2,11 @@ import { Component } from 'react';
 import { Redirect } from 'react-router';
 import LoginForm from '../components/LoginFormComponent';
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
+function Login(props) {
+    if (props.isLoggedIn) {
+        return <Redirect to="/dashboard" />
     }
-
-    render() {
-        if (this.props.isLoggedIn) {
-            return <Redirect to="/dashboard" />
-        }
-        return (
-            <LoginForm login={this.props.login} />
-        )
-    }
+    return <LoginForm login={props.login} />
 }
 
 export default Login;

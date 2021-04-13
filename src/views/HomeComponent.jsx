@@ -3,17 +3,14 @@ import Hero from '../components/HeroComponent';
 import Association from '../components/AssociationComponent';
 import Coaches from '../components/CoachesComponent';
 
-class Home extends Component {
-
-    render() {
-        return(
-            <>
-                <Hero />
-                <Association />
-                <Coaches />
-            </>
-        )
-    }
+function Home() {
+    return(
+        <>
+            <Hero />
+            <Association />
+            <Coaches />
+        </>
+    )
 }
 
 export default Home;
