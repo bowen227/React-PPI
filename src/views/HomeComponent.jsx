@@ -7,7 +7,7 @@ function Home() {
     return(
         <>
             <Hero />
-            <Association />
+            {/* <Association /> */}
             <Coaches />
         </>
     )

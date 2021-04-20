@@ -42,10 +42,12 @@ function App() {
                         {isLoggedIn ? 
                         <PlayerDetails />
                         :
-                        <Redirect to="/home" />
+                        <Redirect to="/"/>
                         }
                     </Route>
-                    <Route path="/" component={NoRoute} />
+                    <Route path="/">
+                        <NoRoute />
+                    </Route>
                 </Switch>
             </Router>
             <Footer />

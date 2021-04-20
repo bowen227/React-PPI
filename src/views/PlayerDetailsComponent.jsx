@@ -22,7 +22,7 @@ class PlayerDetails extends Component {
 
     render() {
         return (
-            <Container className="py-5">
+            <Container className="py-5 player-details">
                 <Row className="py-3">
                     <Col className="text-right">
                         <button className="btn btn-outline-dark" onClick={() => this.props.history.goBack()}>Back</button>

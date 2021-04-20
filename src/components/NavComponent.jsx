@@ -43,12 +43,12 @@ class Navigation extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     {!this.props.isLoggedIn ?
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
+                            {/* <NavItem>
                                 <NavLink href="#association">For Associations</NavLink>
-                            </NavItem>
-                            <NavItem>
+                            </NavItem> */}
+                            {/* <NavItem>
                                 <NavLink href="#coaches">For Coaches</NavLink>
-                            </NavItem>
+                            </NavItem> */}
                             <NavItem>
                                 <NavLink>
                                     <Link to="/login">Login</Link>
