@@ -34,17 +34,17 @@ body {
   height: 80vh;
 }
 
-.players-list-container {
+/* .players-list-container {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 700px;
-}
+} */
 
-.coaches-list-container {
+/* .coaches-list-container {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 700px;
-}
+} */
 
 .player-list {
   color: black;

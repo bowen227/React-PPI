@@ -18,18 +18,18 @@ class PlayerList extends Component {
                         <div className="col d-flex align-items-center">
                             {player.firstName + ' ' + player.lastName}
                         </div>
-                        {/* <div className="col d-none d-md-flex align-items-center">
+                        <div className="col d-none d-md-flex align-items-center">
                             {player.throws}
                         </div>
                         <div className="col d-none d-md-flex align-items-center">
                             {player.bats}
-                        </div> */}
+                        </div>
                         <div className="col d-none d-md-flex align-items-center">
                             {player.group}
                         </div>
-                        {/* <div className="col-2 d-flex align-items-center">
+                        <div className="col-2 d-flex align-items-center">
                             0.00
-                        </div> */}
+                        </div>
                     </div>
                 </Link>
             );

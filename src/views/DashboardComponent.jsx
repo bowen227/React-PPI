@@ -57,7 +57,7 @@ class Dashboard extends Component {
                     <button className="btn btn-outline-dark m-2">Add Coach</button>
                 </Row>
                 <Row className="pt-5">
-                    <Col md="6" className="pr-md-3 players-list-container">
+                    <Col className="players-list-container">
                         <h3>Player List</h3>
                         {this.state.players ? 
                             <ListGroup flush className="w-100">
@@ -66,9 +66,8 @@ class Dashboard extends Component {
                             :
                             <div>No Players to display</div>
                         }
-
                     </Col>
-                    <Col md="6" className="pl-md-3 coaches-list-container">
+                    {/* <Col md="6" className="pl-md-3 coaches-list-container">
                         <h3>Coaches List</h3>
                         {this.state.coaches ?
                             <ListGroup flush className="w-100">
@@ -77,8 +76,7 @@ class Dashboard extends Component {
                             :
                             <div>No Coaches to display</div>
                     }
-
-                    </Col>
+                    </Col> */}
                 </Row>
                 <NewEvent toggle={this.toggle} isOpen={this.state.modal} />
             </Container>
