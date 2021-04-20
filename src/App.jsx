@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import './App.css';
 import Navigation from './components/NavComponent';
 import Home from './views/HomeComponent';
@@ -8,6 +8,7 @@ import Login from './views/LoginComponent';
 import Signup from './views/SignupComponent';
 import Footer from './components/FooterComponent';
 import PlayerDetails from './views/PlayerDetailsComponent';
+import NoRoute from './components/NoRouteComponent';
 
 function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -38,8 +39,13 @@ function App() {
                         <Signup />
                     </Route>
                     <Route path="/playerDetails/:id" exact>
+                        {isLoggedIn ? 
                         <PlayerDetails />
+                        :
+                        <Redirect to="/home" />
+                        }
                     </Route>
+                    <Route path="/" component={NoRoute} />
                 </Switch>
             </Router>
             <Footer />
