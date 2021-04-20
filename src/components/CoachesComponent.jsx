@@ -52,6 +52,9 @@ class Coaches extends Component {
                         </ul>
                     </div>
                 </div>
+                <div className="p-5"></div>
+                <div className="p-md-5"></div>
+                <div className="p-5"></div>
             </div>
         )
     }
