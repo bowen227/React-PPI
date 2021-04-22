@@ -4,10 +4,10 @@ import Association from '../components/AssociationComponent';
 import Coaches from '../components/CoachesComponent';
 
 function Home() {
-    return(
+    return (
         <>
             <Hero />
-            {/* <Association /> */}
+            <Association />
             <Coaches />
         </>
     )

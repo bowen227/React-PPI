@@ -20,8 +20,8 @@ function LoginForm(props) {
                         <FormGroup>
                             <Label for="accountType">Account Type</Label>
                             <Input type="select" name="accountType" id="accountType">
+                                <option value="association">Association</option>
                                 <option value="coach">Coach</option>
-                                <option value="parent">Parent</option>
                             </Input>
                         </FormGroup>
                         <Button className="btn btn-outline" onClick={props.login}>Login</Button>
