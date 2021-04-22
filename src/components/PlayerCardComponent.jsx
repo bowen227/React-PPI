@@ -16,13 +16,17 @@ class PlayerCard extends Component {
                         </Col>
                         <Col>
                             <h3 className="m-0">{this.props.player.firstName + " " + this.props.player.lastName}</h3>
+                            <small>Positon goes here</small>
+                        </Col>
+                        <Col xs="3" md="2">
+                            <button className="btn btn-outline-danger">&#9998;</button>
                         </Col>
                     </Row>
                 </CardHeader>
                 <CardBody>
                     <Row className="flex-nowrap">
                         <Col>
-                            <h5>Group</h5>
+                            <h5>Position</h5>
                         </Col>
                         <Col>
                             <h5>Bats</h5>
