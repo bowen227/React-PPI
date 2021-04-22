@@ -14,11 +14,24 @@ class NewEvent extends Component {
                     <Form>
                         <FormGroup>
                             <Label for="eventTitle">Title</Label>
-                            <Input type="text" id="eventTitle" name="eventTitle" placeholder="Event Title"></Input>
+                            <Input
+                                type="text"
+                                id="eventTitle"
+                                value={this.props.eventTitle}
+                                name="eventTitle"
+                                placeholder="Event Title"
+                                onChange={this.props.handleInputChange}>
+                            </Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="eventDate">Date</Label>
-                            <Input type="date" id="eventDate" name="eventDate"></Input>
+                            <Input
+                                type="date"
+                                id="eventDate"
+                                value={this.props.eventDate}
+                                name="eventDate"
+                                onChange={this.props.handleInputChange}>
+                            </Input>
                         </FormGroup>
                     </Form>
                 </ModalBody>
