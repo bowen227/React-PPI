@@ -7,6 +7,7 @@ import { SCHEDULE } from '../shared/schedule';
 import PlayerList from '../components/PlayerListComponent';
 import NewEvent from '../components/NewEventModalComponent';
 import CoachList from '../components/CoachListComponent';
+import NewPlayer from '../components/NewPlayerModalComponent';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -19,19 +20,22 @@ class Dashboard extends Component {
             association: null,
             league: null,
             schedule: SCHEDULE,
-            modal: false
+            newEvent: false,
+            newPlayer: false
         }
 
         this.toggle = this.toggle.bind(this);
     }
 
-    toggle = () => this.setState({modal: !this.state.modal});
+    toggle(event) {
+        this.setState({ [event.target.name]: !this.state[event.target.name] })
+    }
 
     render() {
         if (!this.props.isLoggedIn) {
             return <Redirect to="/" />
         }
-        return(
+        return (
             <Container className='py-5'>
                 <Row>
                     <Col className="py-3" md="6">
@@ -44,7 +48,7 @@ class Dashboard extends Component {
                                 <h3>Upcoming Events</h3>
                             </Col>
                             <Col>
-                                <Button onClick={this.toggle}>Add Event</Button>
+                                <Button name="newEvent" onClick={this.toggle}>Add Event</Button>
                             </Col>
                         </Row>
                         <ListGroup flush >
@@ -53,13 +57,13 @@ class Dashboard extends Component {
                     </Col>
                 </Row>
                 <Row className="d-flex">
-                    <button className="btn btn-outline-dark m-2">Add Player</button>
+                    <button name="newPlayer" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
                     <button className="btn btn-outline-dark m-2">Add Coach</button>
                 </Row>
                 <Row className="pt-5">
                     <Col className="players-list-container">
                         <h3>Player List</h3>
-                        {this.state.players ? 
+                        {this.state.players ?
                             <ListGroup flush className="w-100">
                                 <PlayerList players={this.state.players} />
                             </ListGroup>
@@ -78,7 +82,8 @@ class Dashboard extends Component {
                     }
                     </Col> */}
                 </Row>
-                <NewEvent toggle={this.toggle} isOpen={this.state.modal} />
+                <NewEvent toggle={this.toggle} isOpen={this.state.newEvent} />
+                <NewPlayer toggle={this.toggle} isOpen={this.state.newPlayer} />
             </Container>
         )
     }

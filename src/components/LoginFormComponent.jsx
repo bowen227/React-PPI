@@ -2,8 +2,8 @@ import { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 
-function LoginForm(props){
-    return(
+function LoginForm(props) {
+    return (
         <div className="container login-container">
             <div className="row align-items-center justify-content-center">
                 <div className="col-md-6 align-items-center p-5 h-80">
@@ -16,6 +16,13 @@ function LoginForm(props){
                         <FormGroup>
                             <Label for="password">Password</Label>
                             <Input type="password" name="password" id="password" placeholder="Enter Password" />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="accountType">Account Type</Label>
+                            <Input type="select" name="accountType" id="accountType">
+                                <option value="coach">Coach</option>
+                                <option value="parent">Parent</option>
+                            </Input>
                         </FormGroup>
                         <Button className="btn btn-outline" onClick={props.login}>Login</Button>
                     </Form>

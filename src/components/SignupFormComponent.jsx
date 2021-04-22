@@ -14,6 +14,13 @@ function SignupForm() {
                             <Input type="email" name="email" id="email" placeholder="Enter Email" />
                         </FormGroup>
                         <FormGroup>
+                            <Label for="accountType">Account Type</Label>
+                            <Input type="select" name="accountType" id="accountType">
+                                <option value="coach">Coach</option>
+                                <option value="parent">Parent</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
                             <Label for="password">Password</Label>
                             <Input type="password" name="password" id="password" placeholder="Enter Password" />
                         </FormGroup>

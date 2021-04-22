@@ -8,8 +8,8 @@ class NewEvent extends Component {
 
     render() {
         return (
-            <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}>
-                <ModalHeader toggle={this.props.toggle}>New Event</ModalHeader>
+            <Modal isOpen={this.props.isOpen}>
+                <ModalHeader>New Event</ModalHeader>
                 <ModalBody>
                     <Form>
                         <FormGroup>
@@ -23,8 +23,8 @@ class NewEvent extends Component {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="dark" onClick={this.props.toggle}>Save</Button>
-                    <Button color="warning" onClick={this.props.toggle}>Cancel</Button>
+                    <Button name="newEvent" color="dark" onClick={this.props.toggle}>Save</Button>
+                    <Button name="newEvent" color="warning" onClick={this.props.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         )
