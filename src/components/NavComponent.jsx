@@ -51,17 +51,17 @@ class Navigation extends Component {
                             </NavItem> */}
                             <NavItem>
                                 <NavLink>
-                                    <Link to="/login">Login</Link>
+                                    <Link to="/login" onClick={() => this.toggle(this.state.isOpen)}>Login</Link>
                                 </NavLink>
                             </NavItem>
                         </Nav> :
-                        <Nav className="ml-auto align-items-center" navbar>
+                        <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="#">Profile</NavLink>
+                                <NavLink href="#" onClick={() => this.toggle(this.state.isOpen)}>Profile</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink>
-                                    <button className="btn btn-outline-danger ml-3" onClick={this.props.logout}>Sign Out</button>
+                                <NavLink onClick={() => this.toggle(this.state.isOpen)}>
+                                    <button className="btn btn-outline-danger ml-3" onClick={this.props.logout} >Sign Out</button>
                                 </NavLink>
                             </NavItem>
                         </Nav>
