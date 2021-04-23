@@ -25,7 +25,7 @@ class NewEvent extends Component {
     handleSubmit(event) {
         event.preventDefault()
         const payload = {
-            id: 0,
+            id: this.props.id,
             title: this.state.eventTitle,
             location: "Soddy Daisy",
             time: "7pm",

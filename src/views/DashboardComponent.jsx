@@ -36,7 +36,7 @@ class Dashboard extends Component {
                         <h2>{this.props.teamName ? this.props.teamName : 'No team selected'}</h2>
                         <span>{this.props.league ? this.props.league : 'No league selected'}</span>
                     </Col>
-                    <Col className="py-3">
+                    {/* <Col className="py-3">
                         <Row>
                             <Col>
                                 <h3>Upcoming Events</h3>
@@ -48,7 +48,7 @@ class Dashboard extends Component {
                         <ListGroup flush >
                             <Schedule schedule={this.props.schedule} />
                         </ListGroup>
-                    </Col>
+                    </Col> */}
                 </Row>
                 <Row className="d-flex">
                     <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
@@ -76,7 +76,7 @@ class Dashboard extends Component {
                     }
                     </Col> */}
                 </Row>
-                <NewEvent toggle={this.toggle} isOpen={this.state.eModal} />
+                {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} id={this.props.schedule.length} /> */}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
             </Container>
         )
