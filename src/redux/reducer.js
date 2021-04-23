@@ -8,8 +8,6 @@ export const initialState = {
     coach: '',
     teamName: '',
     league: '',
-    eventModal: false,
-    playerModal: false
 }
 
 export const Reducer = (state = initialState, action) => {
