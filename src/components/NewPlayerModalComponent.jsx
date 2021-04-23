@@ -27,8 +27,8 @@ class NewPlayer extends Component {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button name="newPlayer" color="dark" onClick={this.props.toggle}>Save</Button>
-                    <Button name="newPlayer" color="warning" onClick={this.props.toggle}>Cancel</Button>
+                    <Button name="pModal" color="dark" onClick={this.props.toggle}>Save</Button>
+                    <Button name="pModal" color="warning" onClick={this.props.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         )

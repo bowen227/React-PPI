@@ -1,9 +1,38 @@
 import { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class NewEvent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            eventTitle: '',
+            eventDate: ''
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInputChange(event) {
+        const target = event.target
+        const value = target.value
+        this.setState({ [target.name]: value })
+    }
+
+    handleSubmit(event) {
+        event.preventDefault()
+        const payload = {
+            id: 0,
+            title: this.state.eventTitle,
+            location: "Soddy Daisy",
+            time: "7pm",
+            // date: this.state.eventDate
+        }
+
+        this.props.addNewEvent(payload)
     }
 
     render() {
@@ -17,10 +46,9 @@ class NewEvent extends Component {
                             <Input
                                 type="text"
                                 id="eventTitle"
-                                value={this.props.eventTitle}
                                 name="eventTitle"
                                 placeholder="Event Title"
-                                onChange={this.props.handleInputChange}>
+                                onChange={this.handleInputChange}>
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -28,20 +56,38 @@ class NewEvent extends Component {
                             <Input
                                 type="date"
                                 id="eventDate"
-                                value={this.props.eventDate}
                                 name="eventDate"
-                                onChange={this.props.handleInputChange}>
+                                onChange={this.handleInputChange}>
                             </Input>
                         </FormGroup>
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button name="newEvent" color="dark" onClick={this.props.toggle}>Save</Button>
-                    <Button name="newEvent" color="warning" onClick={this.props.toggle}>Cancel</Button>
+                    <Button name="eModal" color="dark" onClick={this.handleSubmit}>Save</Button>
+                    <Button name="eModal" color="warning" onClick={this.props.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         )
     }
 }
 
-export default NewEvent;
+const mapStateToProps = state => {
+    return {
+        eventTitle: state.eventTitle,
+        eventDate: state.eventDate
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    // const p = {
+    //     eventTitle: this.state.eventTitle,
+    //     eventDate: this.state.eventDate
+    // }
+    return {
+        addNewEvent: (payload) => {
+            dispatch({ type: "ADDED_NEW_EVENT", payload: payload })
+        }
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewEvent));

@@ -8,58 +8,20 @@ import PlayerList from '../components/PlayerListComponent';
 import NewEvent from '../components/NewEventModalComponent';
 import CoachList from '../components/CoachListComponent';
 import NewPlayer from '../components/NewPlayerModalComponent';
-import { Reducer } from '../redux/reducer';
-
-const mapStateToProps = state => {
-    return {
-        players: state.players,
-        schedule: state.schedule,
-        coach: state.coach,
-        association: state.association,
-        teamName: state.teamName,
-        league: state.league,
-        eventModal: state.newEvent,
-        playerModal: state.newPlayer
-    }
-}
 
 class Dashboard extends Component {
-    // constructor(props) {
-    //     super(props)
-
-    //     this.state = {
-    //         eventModal: false,
-    //         playerModal: false
-    //     }
-
-    //     this.toggle = this.toggle.bind(this);
-    //     this.handleInputChange = this.handleInputChange.bind(this);
-    // }
-
-    // toggle(event) {
-    //     this.setState({ [event.target.name]: !this.state[event.target.name] })
-    // }
-
-    toggle(event) {
-        console.log(event.target.name)
-        switch (event.target.name) {
-            case "eventModal":
-                this.props.store.dispatch({ type: "TOGGLED_EVENT_MODAL" })
-                return;
-            case "playerModal":
-                this.props.store.dispatch({ type: "TOGGLED_PLAYER_MODAL" })
-                return;
-            default:
-                return;
+    constructor(props) {
+        super(props)
+        this.state = {
+            eModal: false,
+            pModal: false
         }
+
+        this.toggle = this.toggle.bind(this)
     }
 
-    handleInputChange(event) {
-        const target = event.target
-        const name = target.name
-        const value = target.value
-        console.log(target, name, value)
-        // this.setState({ [name]: value })
+    toggle(event) {
+        this.setState({ [event.target.name]: !this.state[event.target.name] })
     }
 
     render() {
@@ -80,7 +42,7 @@ class Dashboard extends Component {
                                 <h3>Upcoming Events</h3>
                             </Col>
                             <Col>
-                                <Button name="eventModal" onClick={this.toggle}>Add Event</Button>
+                                <Button name="eModal" onClick={this.toggle}>Add Event</Button>
                             </Col>
                         </Row>
                         <ListGroup flush >
@@ -89,7 +51,7 @@ class Dashboard extends Component {
                     </Col>
                 </Row>
                 <Row className="d-flex">
-                    <button name="playerModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
+                    <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
                     <button className="btn btn-outline-dark m-2">Add Coach</button>
                 </Row>
                 <Row className="pt-5">
@@ -114,10 +76,21 @@ class Dashboard extends Component {
                     }
                     </Col> */}
                 </Row>
-                <NewEvent toggle={this.toggle} isOpen={this.props.newEventModal} />
-                <NewPlayer toggle={this.toggle} isOpen={this.props.newPlayerModal} />
+                <NewEvent toggle={this.toggle} isOpen={this.state.eModal} />
+                <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
             </Container>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        players: state.players,
+        schedule: state.schedule,
+        coach: state.coach,
+        association: state.association,
+        teamName: state.teamName,
+        league: state.league,
     }
 }
 

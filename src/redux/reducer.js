@@ -13,11 +13,12 @@ export const initialState = {
 }
 
 export const Reducer = (state = initialState, action) => {
+    const newState = { ...state };
+
     switch (action.type) {
-        case "TOGGLED_EVENT_MODAL":
-            initialState.eventModal = !initialState.eventModal;
-        case "TOGGLED_PLAYER_MODAL":
-            initialState.playerModal = !initialState.playerModal;
+        case "ADDED_NEW_EVENT":
+            newState.schedule = newState.schedule.unshift(action.payload)
+            return state
         default:
             return state
     }

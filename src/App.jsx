@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Provider } from 'react-redux';
-import { ConfigureStore } from './redux/configureStore';
 import { BrowserRouter as Router, Switch, Route, useHistory, Redirect } from 'react-router-dom';
 import './App.css';
 import Navigation from './components/NavComponent';
@@ -11,8 +9,6 @@ import Signup from './views/SignupComponent';
 import Footer from './components/FooterComponent';
 import PlayerDetails from './views/PlayerDetailsComponent';
 import NoRoute from './components/NoRouteComponent';
-
-const store = ConfigureStore();
 
 function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -26,7 +22,7 @@ function App() {
     }
 
     return (
-        <Provider store={store}>
+        <div>
             <Router>
                 <Navigation isLoggedIn={isLoggedIn} logout={LogUserOut} />
                 <Switch>
@@ -55,7 +51,7 @@ function App() {
                 </Switch>
             </Router>
             <Footer />
-        </Provider>
+        </div>
     );
 }
 

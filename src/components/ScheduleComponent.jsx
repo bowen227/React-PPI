@@ -4,6 +4,7 @@ import { ListGroupItem } from 'reactstrap';
 class Schedule extends Component {
     constructor(props) {
         super(props);
+        console.log(props)
     }
 
     render() {
@@ -26,7 +27,7 @@ class Schedule extends Component {
                 );
             }
         });
-        return(
+        return (
             <>{schedule}</>
         )
     }
