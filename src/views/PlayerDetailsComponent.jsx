@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import EvalModal from '../components/EvalModalComponent';
 import PastEvals from '../components/PastEvalsComponent';
 import PlayerCard from '../components/PlayerCardComponent';
-import { PLAYERS } from '../shared/players';
 
 const mapStateToProps = state => {
     return {
