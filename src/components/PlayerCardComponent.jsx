@@ -12,7 +12,7 @@ class PlayerCard extends Component {
                 <CardHeader>
                     <Row className="align-items-center">
                         <Col xs='3'>
-                            <img class="w-100" src="../assets/images/default_user.png" alt="Player profile image"></img>
+                            <img className="w-100" src="../assets/images/default_user.png" alt="Player profile image"></img>
                         </Col>
                         <Col>
                             <h3 className="m-0">{this.props.player.firstName + " " + this.props.player.lastName}</h3>

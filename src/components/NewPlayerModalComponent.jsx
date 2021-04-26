@@ -4,6 +4,31 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 class NewPlayer extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            firstName: '',
+            lastName: '',
+            throws: 'right',
+            bats: 'right',
+            group: '6U',
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.newPlayer = this.newPlayer.bind(this)
+    }
+
+    newPlayer(event) {
+        event.preventDefault()
+        this.props.toggle(event)
+
+        this.props.addPlayer(this.state.firstName, this.state.lastName, this.state.throws, this.state.bats, this.state.group)
+    }
+
+    handleChange(event) {
+        const target = event.target
+        const name = target.name
+        const value = target.value
+        this.setState({ [name]: value })
     }
 
     render() {
@@ -14,11 +39,35 @@ class NewPlayer extends Component {
                     <Form>
                         <FormGroup>
                             <Label for="firstName">First Name</Label>
-                            <Input type="text" id="firstName" name="firstName" />
+                            <Input type="text" name="firstName" value={this.state.firstName} onChange={this.handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label for="lastName">Last Name</Label>
-                            <Input type="text" id="lastName" name="lastName" />
+                            <Input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="throws">Throws</Label>
+                            <Input type="select" name="throws" value={this.state.throws} onChange={this.handleChange}>
+                                <option value="right">Right</option>
+                                <option value="left">Left</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="bats">Bats</Label>
+                            <Input type="select" name="bats" value={this.state.bats} onChange={this.handleChange}>
+                                <option value="right">Right</option>
+                                <option value="left">Left</option>
+                                <option value="switch">Switch</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="group">Group</Label>
+                            <Input type="select" name="group" value={this.state.group} onChange={this.handleChange}>
+                                <option value="6U">6U</option>
+                                <option value="8U">8U</option>
+                                <option value="10U">10U</option>
+                                <option value="12U">12U</option>
+                            </Input>
                         </FormGroup>
                         <FormGroup>
                             <Label for="profileImg">Profile Image</Label>
@@ -27,7 +76,7 @@ class NewPlayer extends Component {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button name="pModal" color="dark" onClick={this.props.toggle}>Save</Button>
+                    <Button name="pModal" color="dark" onClick={this.newPlayer}>Save</Button>
                     <Button name="pModal" color="warning" onClick={this.props.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>

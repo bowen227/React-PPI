@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ListGroupItem } from 'reactstrap';
 
 class PlayerList extends Component {
     constructor(props) {

@@ -8,6 +8,23 @@ import PlayerList from '../components/PlayerListComponent';
 import NewEvent from '../components/NewEventModalComponent';
 import CoachList from '../components/CoachListComponent';
 import NewPlayer from '../components/NewPlayerModalComponent';
+import { addPlayer } from '../redux/ActionCreators';
+
+
+const mapStateToProps = state => {
+    return {
+        players: state.players,
+        schedule: state.schedule,
+        coach: state.coach,
+        association: state.association,
+        teamName: state.teamName,
+        league: state.league
+    }
+}
+
+const mapDispatchToProps = {
+    addPlayer: (firstName, lastName, throws, bats, group) => (addPlayer(firstName, lastName, throws, bats, group))
+}
 
 class Dashboard extends Component {
     constructor(props) {
@@ -45,9 +62,9 @@ class Dashboard extends Component {
                                 <Button name="eModal" onClick={this.toggle}>Add Event</Button>
                             </Col>
                         </Row>
-                        <ListGroup flush >
+                        {/* <ListGroup flush >
                             <Schedule schedule={this.props.schedule} />
-                        </ListGroup>
+                        </ListGroup> */}
                     </Col>
                 </Row>
                 <Row className="d-flex">
@@ -77,21 +94,10 @@ class Dashboard extends Component {
                     </Col> */}
                 </Row>
                 <NewEvent toggle={this.toggle} isOpen={this.state.eModal} />
-                <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
+                <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
             </Container>
         )
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        players: state.players,
-        schedule: state.schedule,
-        coach: state.coach,
-        association: state.association,
-        teamName: state.teamName,
-        league: state.league,
-    }
-}
-
-export default withRouter(connect(mapStateToProps)(Dashboard));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
