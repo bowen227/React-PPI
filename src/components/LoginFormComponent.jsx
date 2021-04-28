@@ -1,8 +1,32 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function LoginForm(props) {
+    const [name, setName] = useState('')
+    const [type, setType] = useState('association')
+
+    const handleChange = (event) => {
+        const target = event.target
+        const name = target.name
+        const value = target.value
+
+        if (name === 'email') {
+            setName(value)
+        } else {
+            setType(value)
+        }
+    }
+
+    const handleLogin = () => {
+        const u = {
+            name: name,
+            type: type
+        }
+        localStorage.setItem("user", JSON.stringify(u))
+        console.log(name + ' ' + type)
+        props.login()
+    }
     return (
         <div className="container login-container">
             <div className="row align-items-center justify-content-center">
@@ -11,7 +35,7 @@ function LoginForm(props) {
                     <Form className="my-3">
                         <FormGroup>
                             <Label for="email">Email</Label>
-                            <Input type="email" name="email" id="email" placeholder="Enter Email" />
+                            <Input type="email" name="email" id="email" placeholder="Enter Email" onChange={handleChange} />
                         </FormGroup>
                         <FormGroup>
                             <Label for="password">Password</Label>
@@ -19,12 +43,12 @@ function LoginForm(props) {
                         </FormGroup>
                         <FormGroup>
                             <Label for="accountType">Account Type</Label>
-                            <Input type="select" name="accountType" id="accountType">
+                            <Input type="select" name="accountType" id="accountType" onChange={handleChange}>
                                 <option value="association">Association</option>
                                 <option value="coach">Coach</option>
                             </Input>
                         </FormGroup>
-                        <Button className="btn btn-outline" onClick={props.login}>Login</Button>
+                        <Button className="btn btn-outline" onClick={handleLogin}>Login</Button>
                     </Form>
                     <span>Don't have an account? <Link to="/signup">Create Account</Link></span>
                 </div>

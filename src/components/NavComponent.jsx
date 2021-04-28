@@ -57,7 +57,7 @@ class Navigation extends Component {
                         </Nav> :
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="#" onClick={() => this.toggle(this.state.isOpen)}>Profile</NavLink>
+                                {/* <NavLink href="#" onClick={() => this.toggle(this.state.isOpen)}>Profile</NavLink> */}
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={() => this.toggle(this.state.isOpen)}>

@@ -12,13 +12,17 @@ import NoRoute from './components/NoRouteComponent';
 
 function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
+    const [user, setUser] = useState({})
 
     function LogUserIn() {
-        setLoggedIn(!isLoggedIn);
+        setUser(JSON.parse(localStorage.getItem("user")))
+        setLoggedIn(true);
     }
 
     function LogUserOut() {
-        setLoggedIn(!isLoggedIn);
+        localStorage.removeItem("user")
+        setUser({})
+        setLoggedIn(false);
     }
 
     return (
@@ -33,7 +37,7 @@ function App() {
                         <Login login={LogUserIn} isLoggedIn={isLoggedIn} />
                     </Route>
                     <Route path="/dashboard" exact>
-                        <Dashboard isLoggedIn={isLoggedIn} />
+                        <Dashboard isLoggedIn={isLoggedIn} user={user} />
                     </Route>
                     <Route path="/signup" exact>
                         <Signup />

@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import { Redirect } from 'react-router';
 import LoginForm from '../components/LoginFormComponent';
 

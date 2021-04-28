@@ -31,7 +31,10 @@ class Dashboard extends Component {
         super(props)
         this.state = {
             eModal: false,
-            pModal: false
+            pModal: false,
+            teamName: null,
+            association: null,
+            league: null,
         }
 
         this.toggle = this.toggle.bind(this)
@@ -49,7 +52,8 @@ class Dashboard extends Component {
             <Container className='py-5'>
                 <Row>
                     <Col className="py-3" md="6">
-                        <h2>{this.props.association ? this.props.association : 'No association selected'}</h2>
+                        <h2>{this.props.user.type === 'association' ? `Association: ${this.props.user.name}` : `Coach: ${this.props.user.name}`}</h2>
+                        {/* <h2>{this.props.association ? this.props.association : 'No association selected'}</h2> */}
                         <h2>{this.props.teamName ? this.props.teamName : 'No team selected'}</h2>
                         <span>{this.props.league ? this.props.league : 'No league selected'}</span>
                     </Col>
@@ -69,7 +73,9 @@ class Dashboard extends Component {
                 </Row>
                 <Row className="d-flex">
                     <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
-                    <button className="btn btn-outline-dark m-2">Add Coach</button>
+                    <button className="btn btn-outline-dark m-2">
+                        {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'}
+                    </button>
                 </Row>
                 <Row className="pt-5">
                     <Col className="players-list-container">
