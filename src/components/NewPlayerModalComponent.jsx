@@ -71,19 +71,6 @@ class NewPlayer extends Component {
                                 <option value="12U">12U</option>
                             </Input>
                         </FormGroup>
-                        <FormGroup>
-                            <Label for="bats">Bats</Label>
-                            <Input
-                                type="select"
-                                id="bats"
-                                name="bats"
-                                onChange={this.handleInputChange}
-                            >
-                                <option value="right">Right</option>
-                                <option value="left">Left</option>
-                                <option value="switch">Switch</option>
-                            </Input>
-                        </FormGroup>
                         {/* <FormGroup>
                             <Label for="profileImg">Profile Image</Label>
                             <Input type="file" id="profileImg" name="profileImg" />

@@ -33,15 +33,33 @@ class Dashboard extends Component {
             eModal: false,
             pModal: false,
             teamName: null,
+            tempName: null,
+            addTeam: false,
             association: null,
             league: null,
         }
 
         this.toggle = this.toggle.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.addTeam = this.addTeam.bind(this)
     }
 
     toggle(event) {
         this.setState({ [event.target.name]: !this.state[event.target.name] })
+    }
+
+    handleChange(event) {
+        const target = event.target
+        const name = target.name
+        const value = target.value
+        this.setState({ [name]: value })
+    }
+
+    addTeam(event) {
+        event.preventDefault()
+        console.log(this.state.tempName)
+        this.setState({ teamName: this.state.tempName })
+        this.setState({ addTeam: false })
     }
 
     render() {
@@ -54,7 +72,19 @@ class Dashboard extends Component {
                     <Col className="py-3" md="6">
                         <h2>{this.props.user.type === 'association' ? `Association: ${this.props.user.name}` : `Coach: ${this.props.user.name}`}</h2>
                         {/* <h2>{this.props.association ? this.props.association : 'No association selected'}</h2> */}
-                        <h2>{this.props.teamName ? this.props.teamName : 'No team selected'}</h2>
+                        <h2>{this.state.teamName ? this.state.teamName : 'No team selected'}</h2>
+                        {!this.state.teamName ?
+                            <p>{!this.state.addTeam ?
+                                <button className="btn btn-outline-dark" onClick={() => this.setState({ addTeam: true })}>Add Team ?</button>
+                                :
+                                <div>
+                                    <input type="text" name="tempName" onChange={this.handleChange} />
+                                    <button className="btn btn-outline-dark ml-2" onClick={this.addTeam}>Save</button>
+                                </div>}
+                            </p>
+                            :
+                            ''
+                        }
                         <span>{this.props.league ? this.props.league : 'No league selected'}</span>
                     </Col>
                     <Col className="py-3">
