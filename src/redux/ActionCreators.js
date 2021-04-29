@@ -27,3 +27,10 @@ export const addEvent = (eventId, text, time, date) => ({
         date
     }
 })
+
+export const createTeams = (teams) => ({
+    type: ActionTypes.CREATED_TEAMS,
+    payload: {
+        teams
+    }
+})
