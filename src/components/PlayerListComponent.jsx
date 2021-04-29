@@ -27,7 +27,7 @@ class PlayerList extends Component {
                             {player.group}
                         </div>
                         <div className="col-2 d-flex align-items-center">
-                            0.00
+                            {player.ppi}
                         </div>
                     </div>
                 </Link>

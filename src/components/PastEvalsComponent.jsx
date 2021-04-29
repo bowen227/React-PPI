@@ -1,10 +1,7 @@
 import { Component } from 'react';
-import { Card, CardBody, CardHeader, Row, Col } from 'reactstrap';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 
 class PastEvals extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return(

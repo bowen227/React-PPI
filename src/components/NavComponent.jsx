@@ -5,14 +5,7 @@ import {
     NavbarBrand,
     Collapse,
     Nav,
-    NavItem,
-    NavLink,
     NavbarToggler,
-    Dropdown,
-    DropdownItem,
-    DropdownToggle,
-    DropdownMenu,
-    Button
 } from 'reactstrap';
 
 class Navigation extends Component {
@@ -37,8 +30,8 @@ class Navigation extends Component {
             <Navbar className="sticky-top" color="dark" dark expand="md">
                 <NavbarBrand href="/">
                     <img src="./assets/images/PPI_logo_blue.png" width="50px" height="auto" alt="PPI Logo"></img>
-              Player Power Index
-            </NavbarBrand>
+                    Player Power Index
+                </NavbarBrand>
                 <NavbarToggler onClick={() => this.toggle(this.state.isOpen)} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     {!this.props.isLoggedIn ?
@@ -49,21 +42,17 @@ class Navigation extends Component {
                             {/* <NavItem>
                                 <NavLink href="#coaches">For Coaches</NavLink>
                             </NavItem> */}
-                            <NavItem>
-                                <NavLink>
+                                <div className="nav-item nav-link">
                                     <Link to="/login" onClick={() => this.toggle(this.state.isOpen)}>Login</Link>
-                                </NavLink>
-                            </NavItem>
+                                </div>
                         </Nav> :
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                {/* <NavLink href="#" onClick={() => this.toggle(this.state.isOpen)}>Profile</NavLink> */}
-                            </NavItem>
-                            <NavItem>
-                                <NavLink onClick={() => this.toggle(this.state.isOpen)}>
+                            {/* <NavItem>
+                                <NavLink href="#" onClick={() => this.toggle(this.state.isOpen)}>Profile</NavLink>
+                            </NavItem> */}
+                                <div className="nav-item nav-link" onClick={() => this.toggle(this.state.isOpen)}>
                                     <button className="btn btn-outline-danger ml-3" onClick={this.props.logout} >Sign Out</button>
-                                </NavLink>
-                            </NavItem>
+                                </div>
                         </Nav>
                     }
                 </Collapse>
