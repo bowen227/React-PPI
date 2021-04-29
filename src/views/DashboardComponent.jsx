@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { ListGroup, Container, Row, Col } from 'reactstrap';
+import { ListGroup, Container, Row, Col,
+         Card, CardBody, CardHeader } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -38,7 +39,8 @@ class Dashboard extends Component {
             tempName: null,
             addTeam: false,
             association: null,
-            league: null
+            league: null,
+            isLoading: false
         }
 
         this.toggle = this.toggle.bind(this)
@@ -70,6 +72,8 @@ class Dashboard extends Component {
 
     // method to create balanced teams
     createTeams() {
+        this.setState({ isLoading: true })
+        
         class Team {
             players = []
         }
@@ -85,32 +89,40 @@ class Dashboard extends Component {
 
         // create new teams
         for (let i = 0; i < numOfTeams; i++) {
-            this.teams.push(new Team())
+            const newTeam = new Team()
+            newTeam.teamNumber = this.teams.length + 1
+            this.teams.push(newTeam)
         }
 
         // push players to team in descending order
-        this.filterPlayers(one, numOfTeams)
-        this.filterPlayers(two, numOfTeams)
-        this.filterPlayers(three, numOfTeams)
-        this.filterPlayers(four, numOfTeams)
         this.filterPlayers(five, numOfTeams)
+        this.filterPlayers(four, numOfTeams)
+        this.filterPlayers(three, numOfTeams)
+        this.filterPlayers(two, numOfTeams)
+        this.filterPlayers(one, numOfTeams)
 
         // set state of teams
         this.props.createTeams(this.teams)
 
         // check to see if teams are balanced
+
+        // change loading state
+        setTimeout(() => {
+            this.setState({ isLoading: false })
+        }, 3000);
     }
 
-    // add players to treams
+    teamNum = 0
+
+    // add players to teams
     filterPlayers(group, numOfTeams) {
-        let teamNum = 0
 
         for (let i = 0; i < group.length; i++) {
-            if (teamNum >= numOfTeams) {
-                teamNum = 0
+            if (this.teamNum >= numOfTeams) {
+                this.teamNum = 0
             }
-            this.teams[teamNum].players.push(group[i])
-            teamNum++
+            this.teams[this.teamNum].players.push(group[i])
+            this.teamNum++
         }
     }
 
@@ -118,29 +130,27 @@ class Dashboard extends Component {
         if (!this.props.isLoggedIn) {
             return <Redirect to="/" />
         }
+        if (this.state.isLoading) {
+            return (
+                <div className="h-100">
+                    <div class="spinner-border text-dark" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
+        }
         return (
             <Container className='py-5'>
                 <Row>
                     <Col className="py-3" md="8">
                         <h2>{this.props.user.type === 'association' ? `${this.props.user.name}` : `${this.props.user.name}`}</h2>
                         <h2>{this.props.association ? this.props.association : 'No association selected'}</h2>
-                        {/* <h2>{this.state.teamName ? this.state.teamName : 'No team selected'}</h2> */}
-                        {/* {!this.state.teamName ?
-                            <p>{!this.state.addTeam ?
-                                <button className="btn btn-outline-dark" onClick={() => this.setState({ addTeam: true })}>Add Team ?</button>
-                                :
-                                <div>
-                                    <input type="text" name="tempName" onChange={this.handleChange} />
-                                    <button className="btn btn-outline-dark ml-2" onClick={this.addTeam}>Save</button>
-                                </div>}
-                            </p>
-                            :
-                            ''
-                        } */}
-                        {/* <span>{this.props.league ? this.props.league : 'No league selected'}</span> */}
                     </Col>
                     <Col className="py-3">
-                        <button className="btn btn-outline-danger" onClick={this.createTeams}>Draft Players</button>
+                        {this.props.teams.length === 0 ?
+                            <button className="btn btn-outline-danger" onClick={this.createTeams}>Draft Players</button>
+                            :
+                            <div></div>}
                         {/* <Row>
                             <Col>
                                 <h3>Upcoming Events</h3>
@@ -160,28 +170,51 @@ class Dashboard extends Component {
                         {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'}
                     </button>
                 </Row>
-                <Row className="pt-5">
-                    <Col className="players-list-container">
-                        <h3>Player List</h3>
-                        {this.props.players ?
-                            <ListGroup flush className="w-100">
-                                <PlayerList players={this.props.players} />
-                            </ListGroup>
-                            :
-                            <div>No Players to display</div>
+                {this.props.teams.length === 0 ? 
+                    <Row className="pt-5">
+                        <Col className="players-list-container">
+                            <h3>Player List</h3>
+                            {this.props.players ?
+                                <ListGroup flush className="w-100">
+                                    <PlayerList players={this.props.players} />
+                                </ListGroup>
+                                :
+                                <div>No Players to display</div>
+                            }
+                        </Col>
+                        {/* <Col md="6" className="pl-md-3 coaches-list-container">
+                            <h3>Coaches List</h3>
+                            {this.state.coaches ?
+                                <ListGroup flush className="w-100">
+                                    <CoachList coaches={this.state.coaches} />
+                                </ListGroup>
+                                :
+                                <div>No Coaches to display</div>
                         }
-                    </Col>
-                    {/* <Col md="6" className="pl-md-3 coaches-list-container">
-                        <h3>Coaches List</h3>
-                        {this.state.coaches ?
-                            <ListGroup flush className="w-100">
-                                <CoachList coaches={this.state.coaches} />
-                            </ListGroup>
-                            :
-                            <div>No Coaches to display</div>
-                    }
-                    </Col> */}
-                </Row>
+                        </Col> */}
+                    </Row>
+                    :
+                    <Container>
+                        {/* Change teams to cards click to goto team details */}
+                        {this.props.teams.map(teamArr => {
+                            const renderTeam = teamArr.map(team => {
+                                return (
+                                    <Col className="p-1 team-cards" md="4">
+                                        <Card key={team.teamNumber}>
+                                            <CardHeader>
+                                                <h3>Team Number: {team.teamNumber}</h3>
+                                            </CardHeader>
+                                            <CardBody>
+                                                <h5>Amount of Players: {team.players.length}</h5>
+                                                <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
+                                            </CardBody>
+                                        </Card>
+                                    </Col>
+                                )
+                            })
+                            return <Row>{ renderTeam }</Row>
+                        })}
+                    </Container>}
                 {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
             </Container>

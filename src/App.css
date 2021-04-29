@@ -78,3 +78,8 @@ body {
 .player-details {
   height: 100vh;
 }
+
+.team-cards:hover {
+  cursor: pointer;
+  background-color: #888;
+}

@@ -4,9 +4,7 @@ export const Teams = (state = TEAMS, action) => {
     switch (action.type) {
         case "CREATED_TEAMS":
             const teams = action.payload.teams
-            state = teams
-            console.log(state)
-            return state
+            return [...state, teams]
         default:
             return state
     }
