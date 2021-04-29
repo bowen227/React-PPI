@@ -9,6 +9,7 @@ import Signup from './views/SignupComponent';
 import Footer from './components/FooterComponent';
 import PlayerDetails from './views/PlayerDetailsComponent';
 import NoRoute from './components/NoRouteComponent';
+import TeamDetails from './views/TeamDetailsComponent';
 
 function App() {
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -48,6 +49,13 @@ function App() {
                             :
                             <Redirect to="/" />
                         }
+                    </Route>
+                    <Route path="/teamDetails/:id" exact>
+                        {isLoggedIn ?
+                        <TeamDetails />
+                        :
+                        <Redirect to="/" />    
+                    }
                     </Route>
                     <Route path="/">
                         <NoRoute />

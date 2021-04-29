@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { ListGroup, Container, Row, Col,
-         Card, CardBody, CardHeader } from 'reactstrap';
-import { withRouter } from 'react-router-dom';
+         Card, CardBody, CardHeader, CardFooter } from 'reactstrap';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 // import Schedule from '../components/ScheduleComponent';
@@ -208,6 +208,11 @@ class Dashboard extends Component {
                                                 <h5>Amount of Players: {team.players.length}</h5>
                                                 <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
                                             </CardBody>
+                                            <CardFooter>
+                                                <div  className="nav-link nav-item">
+                                                    <Link className="text-dark">Go to details</Link>
+                                                </div>
+                                            </CardFooter>
                                         </Card>
                                     </Col>
                                 )

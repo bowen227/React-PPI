@@ -80,6 +80,5 @@ body {
 }
 
 .team-cards:hover {
-  cursor: pointer;
   background-color: #888;
 }
