@@ -79,6 +79,14 @@ body {
   height: 100vh;
 }
 
+.generator-loading {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .team-cards:hover {
   background-color: #888;
 }

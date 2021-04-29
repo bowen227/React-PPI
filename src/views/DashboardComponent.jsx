@@ -17,7 +17,7 @@ const mapStateToProps = state => {
         players: state.players,
         schedule: state.schedule,
         coach: state.coach,
-        association: state.association,
+        association: "Hixson Youth Association",
         teamName: state.teamName,
         league: state.league,
         teams: state.teams
@@ -40,7 +40,8 @@ class Dashboard extends Component {
             addTeam: false,
             association: null,
             league: null,
-            isLoading: false
+            isLoading: false,
+            loadingMessage: 'Generating teams...'
         }
 
         this.toggle = this.toggle.bind(this)
@@ -132,10 +133,13 @@ class Dashboard extends Component {
         }
         if (this.state.isLoading) {
             return (
-                <div className="h-100">
-                    <div class="spinner-border text-dark" role="status">
-                        <span class="sr-only">Loading...</span>
+                <div className="generator-loading">
+                    <div className="p-5">
+                        <div class="spinner-border text-dark p-5" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
                     </div>
+                        <h4>{this.state.loadingMessage}</h4>
                 </div>
             )
         }
@@ -200,17 +204,18 @@ class Dashboard extends Component {
                             const renderTeam = teamArr.map(team => {
                                 return (
                                     <Col className="p-1 team-cards" md="4">
-                                        <Card key={team.teamNumber}>
+                                        <Card className="shadow" key={team.teamNumber}>
                                             <CardHeader>
-                                                <h3>Team Number: {team.teamNumber}</h3>
+                                                <h3>{team.name ? team.name : `Team: ${team.teamNumber}`}</h3>
                                             </CardHeader>
                                             <CardBody>
-                                                <h5>Amount of Players: {team.players.length}</h5>
                                                 <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
+                                                <h5>Amount of Players: {team.players.length}</h5>
+                                                <h5>Coach: {team.coach ? team.coach : <a href="#">Select Coach</a>}</h5>
                                             </CardBody>
                                             <CardFooter>
-                                                <div  className="nav-link nav-item">
-                                                    <Link className="text-dark">Go to details</Link>
+                                                <div className="nav-link nav-item text-center">
+                                                    <Link className="text-dark" to={`/teamDetails/${team.teamNumber}`}>Go to details</Link>
                                                 </div>
                                             </CardFooter>
                                         </Card>
