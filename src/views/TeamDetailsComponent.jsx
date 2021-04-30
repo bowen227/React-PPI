@@ -15,8 +15,7 @@ class TeamDetails extends Component {
     }
 
     render() {
-        const selectedTeam = this.props.teams[0][this.props.match.params.id - 1]
-        console.log(selectedTeam)
+        const selectedTeam = this.props.teams[this.props.match.params.id - 1]
         return (
             <Container>
                 <div className="p-2"></div>
@@ -28,18 +27,16 @@ class TeamDetails extends Component {
                             <CardHeader>
                                 <Row>
                                     <Col>
-                                        <h3>
+                                        <h3 className="text-nowrap">
                                             Team: {selectedTeam.teamNumber}
                                         </h3>
                                     </Col>
-                                    <Col>
-                                        <h3>
-                                            {selectedTeam.coach ? `Coach: ${selectedTeam.coach}` : <a href="#">Assign Coach</a>}
-                                        </h3>
+                                    <Col className="d-none d-md-block text-nowrap">
+                                        <h3>Coach: {selectedTeam.headCoach ? selectedTeam.headCoach.lastName : "None assigned"}</h3>
                                     </Col>
                                     <Col>
-                                        <h3>
-                                            Team PPI: {Math.floor(selectedTeam.players.reduce((c, n) => c + n.ppi,0))}
+                                        <h3 className="text-nowrap">
+                                            Team PPI: {Math.floor(selectedTeam.players.reduce((c, n) => c + n.ppi, 0))}
                                         </h3>
                                     </Col>
                                 </Row>
@@ -49,9 +46,9 @@ class TeamDetails extends Component {
                                     <Col><strong>First Name</strong></Col>
                                     <Col><strong>Last Name</strong></Col>
                                     <Col><strong>PPI</strong></Col>
-                                    <Col><strong>Throws</strong></Col>
-                                    <Col><strong>Bats</strong></Col>
-                                    <Col><strong>Edit Player</strong></Col>
+                                    <Col className="d-none d-md-block"><strong>Throws</strong></Col>
+                                    <Col className="d-none d-md-block"><strong>Bats</strong></Col>
+                                    {/* <Col><strong>Edit Player</strong></Col> */}
                                 </Row>
                                 {selectedTeam.players.map(player => {
                                     return (
@@ -65,15 +62,15 @@ class TeamDetails extends Component {
                                             <Col>
                                                 {player.ppi}
                                             </Col>
-                                            <Col>
+                                            <Col className="d-none d-md-block">
                                                 {player.throws}
                                             </Col>
-                                            <Col>
+                                            <Col className="d-none d-md-block">
                                                 {player.bats}
                                             </Col>
-                                            <Col>
+                                            {/* <Col>
                                                 <button className="btn btn-outline-danger">Update</button>
-                                            </Col>
+                                            </Col> */}
                                         </Row>
                                     )
                                 })}
