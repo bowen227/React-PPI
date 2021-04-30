@@ -20,6 +20,14 @@ export const addCoach = (firstName, lastName, head) => ({
     }
 })
 
+export const assignCoach = (id, teamNumber) => ({
+    type: ActionTypes.ASSIGN_COACH,
+    payload: {
+        id,
+        teamNumber
+    }
+})
+
 export const foundPlayer = (id) => ({
     type: ActionTypes.FOUND_PLAYER,
     payload: {

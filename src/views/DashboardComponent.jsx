@@ -10,7 +10,8 @@ import PlayerList from '../components/PlayerListComponent';
 // import CoachList from '../components/CoachListComponent';
 import NewPlayer from '../components/NewPlayerModalComponent';
 import { addPlayer, createTeams } from '../redux/ActionCreators';
-import NewCoach from '../components/NewCoachComponent';
+import NewCoach from '../components/NewCoachModalComponent';
+import SelectCoach from '../components/SelectCoachModalComponent';
 
 
 const mapStateToProps = state => {
@@ -36,6 +37,8 @@ class Dashboard extends Component {
         this.state = {
             cModal: false,
             pModal: false,
+            sModal: false,
+            teamNumber: null,
             teamName: null,
             tempName: null,
             addTeam: false,
@@ -49,9 +52,11 @@ class Dashboard extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.addTeam = this.addTeam.bind(this)
         this.createTeams = this.createTeams.bind(this)
+        this.assignCoach = this.assignCoach.bind(this)
     }
 
     toggle(event) {
+        event.preventDefault()
         this.setState({ [event.target.name]: !this.state[event.target.name] })
     }
 
@@ -126,6 +131,12 @@ class Dashboard extends Component {
             this.teams[this.teamNum].players.push(group[i])
             this.teamNum++
         }
+    }
+
+    assignCoach(tNum) {
+        console.log(tNum)
+        this.setState({ teamNumber: tNum })
+        this.setState({ sModal: !this.state.sModal })
     }
 
     render() {
@@ -207,15 +218,16 @@ class Dashboard extends Component {
                         {this.props.teams.map(teamArr => {
                             const renderTeam = teamArr.map(team => {
                                 return (
-                                    <Col className="p-1 team-cards" md="4">
-                                        <Card className="shadow" key={team.teamNumber}>
+                                    <Col className="p-1 team-cards" md="4" key={team.teamNumber}>
+                                        <Card className="shadow">
                                             <CardHeader>
                                                 <h3>{team.name ? team.name : `Team: ${team.teamNumber}`}</h3>
                                             </CardHeader>
                                             <CardBody>
                                                 <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
                                                 <h5>Amount of Players: {team.players.length}</h5>
-                                                <h5>Coach: {team.coach ? team.coach : <a href="#">Select Coach</a>}</h5>
+                                                <button name="sModal" className="btn btn-outline-dark" onClick={ () => this.assignCoach(team.teamNumber)}>Assign Coach</button>
+                                                {/* <h5>Coach: {team.coach ? team.coach : <button className="btn btn-outline-dark" name="sModal" onClick={this.toggle}>Select Coach</button>}</h5> */}
                                             </CardBody>
                                             <CardFooter>
                                                 <div className="nav-link nav-item text-center">
@@ -232,6 +244,7 @@ class Dashboard extends Component {
                 {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
                 <NewCoach toggle={this.toggle} isOpen={this.state.cModal} />
+                <SelectCoach toggle={this.toggle} isOpen={this.state.sModal} teamNumber={this.state.teamNumber} />
             </Container>
         )
     }
