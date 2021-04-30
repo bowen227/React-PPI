@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
-import { assignCoach } from '../redux/ActionCreators';
+import { assignCoach, assignCoachToTeam } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    assignCoach: (id, teamNumber) => (assignCoach(id, teamNumber))
+    assignCoach: (id, teamNumber) => (assignCoach(id, teamNumber)),
+    assignCoachToTeam: (id, teamNumber) => (assignCoachToTeam(id, teamNumber))
 }
 
 class SelectCoach extends Component {
@@ -37,6 +38,7 @@ class SelectCoach extends Component {
     addCoach(event) {
         event.preventDefault()
         this.props.assignCoach(this.state.selectedCoach, this.props.teamNumber)
+        this.props.assignCoachToTeam(this.state.selectedCoach, this.props.teamNumber)
         this.setState({ selectedCoach: null })
         this.props.toggle(event)
     }
@@ -47,7 +49,7 @@ class SelectCoach extends Component {
                 return <option key={coach.id} value={coach.id}>{coach.firstName} {coach.lastName}</option>
             }
         })
-        return(
+        return (
             <Modal isOpen={this.props.isOpen}>
                 <ModalHeader>Assign Coach</ModalHeader>
                 <ModalBody>

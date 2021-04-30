@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import { ListGroup, Container, Row, Col,
-         Card, CardBody, CardHeader, CardFooter } from 'reactstrap';
+import {
+    ListGroup, Container, Row, Col,
+    Card, CardBody, CardHeader, CardFooter
+} from 'reactstrap';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
@@ -78,21 +80,27 @@ class Dashboard extends Component {
     teams = []
 
     // method to create balanced teams
-    createTeams() {
+    createTeams(group) {
         this.setState({ isLoading: true })
-        
+
+        // create Team obj
         class Team {
+            group = group
             players = []
         }
-        // divide players by 10 to get amount of teams
-        const numOfTeams = Math.floor(this.props.players.length / 10)
 
-        // loop players and push to catagories
-        const one = this.props.players.filter(p => p.ppi <= 1)
-        const two = this.props.players.filter(p => p.ppi > 1 && p.ppi <= 2)
-        const three = this.props.players.filter(p => p.ppi > 2 && p.ppi <= 3)
-        const four = this.props.players.filter(p => p.ppi > 3 && p.ppi <= 4)
-        const five = this.props.players.filter(p => p.ppi > 4)
+        // get division players
+        const players = this.props.players.filter(player => player.group === group)
+
+        // divide players by 10 to get amount of teams
+        const numOfTeams = Math.floor(players.length / 10)
+
+        // filter players by PPI 1-5
+        const one = players.filter(p => p.ppi <= 1)
+        const two = players.filter(p => p.ppi > 1 && p.ppi <= 2)
+        const three = players.filter(p => p.ppi > 2 && p.ppi <= 3)
+        const four = players.filter(p => p.ppi > 3 && p.ppi <= 4)
+        const five = players.filter(p => p.ppi > 4)
 
         // create new teams
         for (let i = 0; i < numOfTeams; i++) {
@@ -101,7 +109,7 @@ class Dashboard extends Component {
             this.teams.push(newTeam)
         }
 
-        // push players to team in descending order
+        // push players to team
         this.filterPlayers(five, numOfTeams)
         this.filterPlayers(four, numOfTeams)
         this.filterPlayers(three, numOfTeams)
@@ -151,7 +159,7 @@ class Dashboard extends Component {
                             <span className="sr-only">Loading...</span>
                         </div>
                     </div>
-                        <h4>{this.state.loadingMessage}</h4>
+                    <h4>{this.state.loadingMessage}</h4>
                 </div>
             )
         }
@@ -164,7 +172,7 @@ class Dashboard extends Component {
                     </Col>
                     <Col className="py-3">
                         {this.props.teams.length === 0 ?
-                            <button className="btn btn-outline-danger" onClick={this.createTeams}>Draft Players</button>
+                            <button className="btn btn-outline-danger" onClick={() => this.createTeams('6U')}>Draft 6U Players</button>
                             :
                             <div></div>}
                         {/* <Row>
@@ -189,7 +197,7 @@ class Dashboard extends Component {
                         Add Coach <span class="badge bg-secondary text-white">{this.props.coaches.length}</span>
                     </button>
                 </Row>
-                {this.props.teams.length === 0 ? 
+                {this.props.teams.length === 0 ?
                     <Row className="pt-5">
                         <Col className="players-list-container">
                             <h3>Player List</h3>
@@ -214,20 +222,29 @@ class Dashboard extends Component {
                     </Row>
                     :
                     <Container>
-                        {/* Change teams to cards click to goto team details */}
-                        {this.props.teams.map(teamArr => {
-                            const renderTeam = teamArr.map(team => {
+                        <Row>
+                            {this.props.teams.map(team => {
                                 return (
                                     <Col className="p-1 team-cards" md="4" key={team.teamNumber}>
                                         <Card className="shadow">
                                             <CardHeader>
-                                                <h3>{team.name ? team.name : `Team: ${team.teamNumber}`}</h3>
+                                                <h4>{team.name ? team.name : `Team: ${team.teamNumber}`}</h4>
+                                                <span>
+                                                    Coaches: {team.headCoach ? team.headCoach.lastName : "__"},{" "}
+                                                    {team.assistant ? team.assistant.lastName : "__"}
+                                                </span>
                                             </CardHeader>
                                             <CardBody>
-                                                <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
-                                                <h5>Amount of Players: {team.players.length}</h5>
-                                                <button name="sModal" className="btn btn-outline-dark" onClick={ () => this.assignCoach(team.teamNumber)}>Assign Coach</button>
-                                                {/* <h5>Coach: {team.coach ? team.coach : <button className="btn btn-outline-dark" name="sModal" onClick={this.toggle}>Select Coach</button>}</h5> */}
+                                                <Row>
+                                                    <Col>
+                                                        <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
+                                                    </Col>
+                                                    <Col>
+                                                        <h5>Group: {team.group}</h5>
+                                                    </Col>
+                                                </Row>
+                                                <h5>Players: {team.players.length}</h5>
+                                                <button name="sModal" className="btn btn-outline-dark" onClick={() => this.assignCoach(team.teamNumber)}>Assign Coach</button>
                                             </CardBody>
                                             <CardFooter>
                                                 <div className="nav-link nav-item text-center">
@@ -237,9 +254,8 @@ class Dashboard extends Component {
                                         </Card>
                                     </Col>
                                 )
-                            })
-                            return <Row>{ renderTeam }</Row>
-                        })}
+                            })}
+                        </Row>
                     </Container>}
                 {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
