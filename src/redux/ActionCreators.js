@@ -11,6 +11,15 @@ export const addPlayer = (firstName, lastName, throws, bats, group) => ({
     }
 })
 
+export const addCoach = (firstName, lastName, head) => ({
+    type: ActionTypes.ADDED_COACH,
+    payload: {
+        firstName,
+        lastName,
+        head
+    }
+})
+
 export const foundPlayer = (id) => ({
     type: ActionTypes.FOUND_PLAYER,
     payload: {

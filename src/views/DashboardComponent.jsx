@@ -10,13 +10,14 @@ import PlayerList from '../components/PlayerListComponent';
 // import CoachList from '../components/CoachListComponent';
 import NewPlayer from '../components/NewPlayerModalComponent';
 import { addPlayer, createTeams } from '../redux/ActionCreators';
+import NewCoach from '../components/NewCoachComponent';
 
 
 const mapStateToProps = state => {
     return {
         players: state.players,
         schedule: state.schedule,
-        coach: state.coach,
+        coaches: state.coaches,
         association: "Hixson Youth Association",
         teamName: state.teamName,
         league: state.league,
@@ -33,7 +34,7 @@ class Dashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            eModal: false,
+            cModal: false,
             pModal: false,
             teamName: null,
             tempName: null,
@@ -169,9 +170,12 @@ class Dashboard extends Component {
                     </Col>
                 </Row>
                 <Row className="d-flex">
-                    <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>Add Player</button>
-                    <button className="btn btn-outline-dark m-2">
-                        {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'}
+                    <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
+                        Add Player <span className="badge bg-secondary text-white">{this.props.players.length}</span>
+                    </button>
+                    <button name="cModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
+                        {/* {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'} */}
+                        Add Coach <span class="badge bg-secondary text-white">{this.props.coaches.length}</span>
                     </button>
                 </Row>
                 {this.props.teams.length === 0 ? 
@@ -227,6 +231,7 @@ class Dashboard extends Component {
                     </Container>}
                 {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
+                <NewCoach toggle={this.toggle} isOpen={this.state.cModal} />
             </Container>
         )
     }
