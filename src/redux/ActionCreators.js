@@ -1,13 +1,14 @@
 import * as ActionTypes from './ActionTypes';
 
-export const addPlayer = (firstName, lastName, throws, bats, group) => ({
+export const addPlayer = (firstName, lastName, throws, bats, group, evaluations) => ({
     type: ActionTypes.ADD_PLAYER,
     payload: {
         firstName,
         lastName,
         throws,
         bats,
-        group
+        group,
+        evaluations
     }
 })
 

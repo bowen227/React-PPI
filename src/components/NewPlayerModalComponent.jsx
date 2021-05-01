@@ -13,6 +13,7 @@ class NewPlayer extends Component {
             throws: 'right',
             bats: 'right',
             group: '6U',
+            evaluations: []
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -23,7 +24,7 @@ class NewPlayer extends Component {
         event.preventDefault()
         this.props.toggle(event)
 
-        this.props.addPlayer(this.state.firstName, this.state.lastName, this.state.throws, this.state.bats, this.state.group)
+        this.props.addPlayer(this.state.firstName, this.state.lastName, this.state.throws, this.state.bats, this.state.group, this.state.evaluations)
     }
 
     handleChange(event) {

@@ -37,6 +37,8 @@ class SelectCoach extends Component {
 
     addCoach(event) {
         event.preventDefault()
+        console.log(this.props.teamNumber)
+        console.log(this.state.selectedCoach)
         this.props.assignCoach(this.state.selectedCoach, this.props.teamNumber)
         this.props.assignCoachToTeam(this.state.selectedCoach, this.props.teamNumber)
         this.setState({ selectedCoach: null })
@@ -56,8 +58,8 @@ class SelectCoach extends Component {
                     <Form>
                         <FormGroup>
                             <Label for="selectedCoach">Select Coach</Label>
-                            <select name="selectedCoach" id="selectedCoach" value={this.state.coach} onChange={this.handleChange}>
-                                <option>Choose a coach...</option>
+                            <select name="selectedCoach" id="selectedCoach" value={this.state.selectedCoach} onChange={this.handleChange}>
+                                <option value="none">Choose a coach...</option>
                                 {showCoachList}
                             </select>
                         </FormGroup>

@@ -36,13 +36,21 @@ class NewCoach extends Component {
         const target = event.target
         const name = target.name
         const value = target.value
+        if (name === "head" && value === "false") {
+            this.setState({ head: false })
+            return
+        }
+        if (name === "head" && value === "true") {
+            this.setState({ head: true })
+            return
+        }
         this.setState({ [name]: value })
     }
 
     render() {
         return (
             <Modal isOpen={this.props.isOpen}>
-                <ModalHeader>New Player</ModalHeader>
+                <ModalHeader>New Coach</ModalHeader>
                 <ModalBody>
                     <Form>
                         <FormGroup>

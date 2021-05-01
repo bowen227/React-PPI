@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col, Button } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'reactstrap';
 import EvalModal from '../components/EvalModalComponent';
 import PastEvals from '../components/PastEvalsComponent';
 import PlayerCard from '../components/PlayerCardComponent';
@@ -39,7 +39,7 @@ class PlayerDetails extends Component {
                         <Button className="mt-2" outline color='danger' onClick={this.toggle}>Evaluate</Button>
                     </Col>
                     <Col className="my-2">
-                        <PastEvals />
+                        <PastEvals playerId={selectedPlayer.id} />
                     </Col>
                 </Row>
                 <EvalModal toggle={this.toggle} isOpen={this.state.modal} player={selectedPlayer.id} />

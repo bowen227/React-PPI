@@ -15,7 +15,11 @@ export const Players = (state = PLAYERS, action) => {
             })
         case "ADD_PLAYER":
             const player = action.payload
-            player.id = state.length
+            player.id = state.length + 1
+            player.pos = 'Out'
+            player.ppi = 0
+            player.evaluations = []
+            console.log(player)
             return state.concat(player)
         case "FOUND_PLAYER":
             return state[action.payload.id]

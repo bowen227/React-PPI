@@ -19,7 +19,7 @@ class PlayerCard extends Component {
                             <small>Positon goes here</small>
                         </Col>
                         <Col xs="3" md="2">
-                            <button className="btn btn-outline-danger">&#9998;</button>
+                            {/* <button className="btn btn-outline-danger">&#9998;</button> */}
                         </Col>
                     </Row>
                 </CardHeader>
