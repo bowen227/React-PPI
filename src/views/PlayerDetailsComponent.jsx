@@ -25,7 +25,7 @@ class PlayerDetails extends Component {
     toggle = () => this.setState({ modal: !this.state.modal });
 
     render() {
-        const selectedPlayer = this.props.players[this.props.match.params.id]
+        const selectedPlayer = this.props.players[this.props.match.params.id - 1]
         return (
             <Container className="py-5 player-details">
                 <Row className="py-3">
@@ -42,7 +42,7 @@ class PlayerDetails extends Component {
                         <PastEvals />
                     </Col>
                 </Row>
-                <EvalModal toggle={this.toggle} isOpen={this.state.modal} />
+                <EvalModal toggle={this.toggle} isOpen={this.state.modal} player={selectedPlayer.id} />
             </Container>
         )
     }

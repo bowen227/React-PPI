@@ -5,7 +5,13 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, I
 import { evalPlayer } from '../redux/ActionCreators';
 
 const mapDispatchToProps = {
-    evalPlayer: (id, evaluation) => (evalPlayer(id, evaluation))
+    evalPlayer: (player, evaluation) => (evalPlayer(player, evaluation))
+}
+
+const mapStateToProps = state => {
+    return {
+        players: state.players,
+    }
 }
 
 class EvalModal extends Component {
@@ -13,7 +19,7 @@ class EvalModal extends Component {
         super(props);
 
         this.state = {
-            inMechanics: 1,
+            inMechanics: 0,
             inGroundballs: 0,
             inRange: 0,
             outMechnics: 0,
@@ -31,18 +37,22 @@ class EvalModal extends Component {
             coachability: 0,
             coachComment: ''
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.addEval = this.addEval.bind(this)
     }
 
     handleChange(event) {
         const target = event.target
         const name = target.name
         const value = target.value
-        console.log(event)
-        // this.setState({ [name]: value })
+        this.setState({ [name]: value })
     }
 
     addEval() {
-        console.log(JSON.stringify(this.state))
+        const player = this.props.players[this.props.player - 1]
+        const newEval = this.state
+        this.props.evalPlayer(player, newEval)
     }
 
     render() {
@@ -52,72 +62,72 @@ class EvalModal extends Component {
                 <ModalBody>
                     <h3>Infield</h3>
                     <FormGroup>
-                        <Label for="inMechanics">Mechanics {this.state.inMechanics}</Label>
-                        <Input type="range" name="inMechanics" min="0" max="5" step=".1" onChange={this.handleChange} />
+                        <Label for="inMechanics">Mechanics <strong>{this.state.inMechanics}</strong></Label>
+                        <Input type="range" name="inMechanics" value={this.state.inMechanics} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="inGroundballs">Groundballs</Label>
+                        <Label for="inGroundballs">Groundballs <strong>{this.state.inGroundballs}</strong></Label>
                         <Input type="range" name="inGroundballs" value={this.state.inGroundballs} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="inRange">Range</Label>
+                        <Label for="inRange">Range <strong>{this.state.inRange}</strong></Label>
                         <Input type="range" name="inRange" value={this.state.inRange} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <h3>OutField</h3>
                     <FormGroup>
-                        <Label for="outMechnics">Mechanics</Label>
+                        <Label for="outMechnics">Mechanics <strong>{this.state.outMechnics}</strong></Label>
                         <Input type="range" name="outMechnics" value={this.state.outMechnics} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="outPopups">Popups</Label>
+                        <Label for="outPopups">Popups <strong>{this.state.outPopups}</strong></Label>
                         <Input type="range" name="outPopups" value={this.state.outPopups} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="outRange">Range</Label>
+                        <Label for="outRange">Range <strong>{this.state.outRange}</strong></Label>
                         <Input type="range" name="outRange" value={this.state.outRange} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <h3>Throwing</h3>
                     <FormGroup>
-                        <Label for="throwMechanics">Mechanics</Label>
+                        <Label for="throwMechanics">Mechanics <strong>{this.state.throwMechanics}</strong></Label>
                         <Input type="range" name="throwMechanics" value={this.state.throwMechanics} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="throwStrength">Strength</Label>
+                        <Label for="throwStrength">Strength <strong>{this.state.throwStrength}</strong></Label>
                         <Input type="range" name="throwStrength" value={this.state.throwStrength} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="throwAccuracy">Accuracy</Label>
+                        <Label for="throwAccuracy">Accuracy <strong>{this.state.throwAccuracy}</strong></Label>
                         <Input type="range" name="throwAccuracy" value={this.state.throwAccuracy} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <h3>Hitting</h3>
                     <FormGroup>
-                        <Label for="hitMechanics">Mechanics</Label>
+                        <Label for="hitMechanics">Mechanics <strong>{this.state.hitMechanics}</strong></Label>
                         <Input type="range" name="hitMechanics" value={this.state.hitMechanics} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="hitPower">Power</Label>
+                        <Label for="hitPower">Power <strong>{this.state.hitPower}</strong></Label>
                         <Input type="range" name="hitPower" value={this.state.hitPower} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="hitContact">Contact</Label>
+                        <Label for="hitContact">Contact <strong>{this.state.hitContact}</strong></Label>
                         <Input type="range" name="hitContact" value={this.state.hitContact} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <h3>Feet</h3>
                     <FormGroup>
-                        <Label for="speed">Speed</Label>
+                        <Label for="speed">Speed <strong>{this.state.speed}</strong></Label>
                         <Input type="range" name="speed" value={this.state.speed} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="mobility">Mobility</Label>
+                        <Label for="mobility">Mobility <strong>{this.state.mobility}</strong></Label>
                         <Input type="range" name="mobility" value={this.state.mobility} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <h3>Attitude</h3>
                     <FormGroup>
-                        <Label for="drive">Drive</Label>
+                        <Label for="drive">Drive <strong>{this.state.drive}</strong></Label>
                         <Input type="range" name="drive" value={this.state.drive} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="coachability">Coachability</Label>
+                        <Label for="coachability">Coachability <strong>{this.state.coachability}</strong></Label>
                         <Input type="range" name="coachability" value={this.state.coachability} min="0" max="5" step=".1" onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
@@ -134,4 +144,4 @@ class EvalModal extends Component {
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(EvalModal));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EvalModal));
