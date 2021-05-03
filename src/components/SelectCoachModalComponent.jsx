@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     assignCoach: (id, teamNumber) => (assignCoach(id, teamNumber)),
-    assignCoachToTeam: (id, teamNumber) => (assignCoachToTeam(id, teamNumber))
+    assignCoachToTeam: (coach, teamNumber) => (assignCoachToTeam(coach, teamNumber))
 }
 
 class SelectCoach extends Component {
@@ -37,10 +37,9 @@ class SelectCoach extends Component {
 
     addCoach(event) {
         event.preventDefault()
-        console.log(this.props.teamNumber)
-        console.log(this.state.selectedCoach)
+        const coach = this.props.coaches.filter(coach => coach.id == +this.state.selectedCoach)[0]
         this.props.assignCoach(this.state.selectedCoach, this.props.teamNumber)
-        this.props.assignCoachToTeam(this.state.selectedCoach, this.props.teamNumber)
+        this.props.assignCoachToTeam(coach, this.props.teamNumber)
         this.setState({ selectedCoach: null })
         this.props.toggle(event)
     }

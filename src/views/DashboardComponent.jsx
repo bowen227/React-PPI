@@ -165,7 +165,6 @@ class Dashboard extends Component {
     }
 
     assignCoach(tNum) {
-        console.log(tNum)
         this.setState({ teamNumber: tNum })
         this.setState({ sModal: !this.state.sModal })
     }
@@ -192,6 +191,9 @@ class Dashboard extends Component {
                     <Col className="py-3" md="8">
                         <h2>{this.props.user.type === 'association' ? `${this.props.user.name}` : `${this.props.user.name}`}</h2>
                         <h2>{this.props.association ? this.props.association : 'No association selected'}</h2>
+                        <div>
+                            {this.props.coaches.map(coach => <div>{coach.firstName}</div>)}
+                        </div>
                     </Col>
                     <Col className="py-3">
                         {this.props.teams.length === 0 ?

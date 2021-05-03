@@ -1,23 +1,23 @@
 import { TEAMS } from '../shared/teams';
-import { COACHES } from '../shared/coaches';
 
 export const Teams = (state = TEAMS, action) => {
     switch (action.type) {
         case "ASSIGN_COACH_TO_TEAM":
-            const coach = COACHES[action.payload.id]
-            const team = state[action.payload.teamNumber - 1]
-            if (coach.head == true) {
-                team.headCoach = coach
-            } else {
-                team.assistant = coach
-            }
+            const coach = action.payload.coach
             return state.map((item, index) => {
                 if (index != action.payload.teamNumber - 1) {
                     return item
                 }
-                return {
-                    ...item,
-                    ...team
+                if (coach.head === true) {
+                    return {
+                        ...item,
+                        headCoach: coach
+                    }
+                } else {
+                    return {
+                        ...item,
+                        assistant: coach
+                    }
                 }
             })
         case "CREATED_TEAMS":

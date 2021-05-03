@@ -37,10 +37,10 @@ export const assignCoach = (id, teamNumber) => ({
     }
 })
 
-export const assignCoachToTeam = (id, teamNumber) => ({
+export const assignCoachToTeam = (coach, teamNumber) => ({
     type: ActionTypes.ASSIGN_COACH_TO_TEAM,
     payload: {
-        id,
+        coach,
         teamNumber
     }
 })

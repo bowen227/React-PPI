@@ -3,8 +3,6 @@ import { COACHES } from '../shared/coaches';
 export const Coaches = (state = COACHES, action) => {
     switch (action.type) {
         case "ASSIGN_COACH":
-            const assignedCoach = state[action.payload.id]
-            assignedCoach.teamNumber = action.payload.teamNumber
             return state.map((item, index) => {
                 if (index != action.payload.id) {
                     return item
@@ -12,7 +10,7 @@ export const Coaches = (state = COACHES, action) => {
 
                 return {
                     ...item,
-                    ...assignedCoach
+                    teamNumber: action.payload.teamNumber
                 }
             })
         case "ADDED_COACH":

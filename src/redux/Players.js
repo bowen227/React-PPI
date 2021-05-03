@@ -19,7 +19,6 @@ export const Players = (state = PLAYERS, action) => {
             player.pos = 'Out'
             player.ppi = 0
             player.evaluations = []
-            console.log(player)
             return state.concat(player)
         case "FOUND_PLAYER":
             return state[action.payload.id]
