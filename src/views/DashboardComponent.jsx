@@ -47,7 +47,9 @@ class Dashboard extends Component {
             association: null,
             league: null,
             isLoading: false,
-            loadingMessage: 'Generating teams...'
+            loadingMessage: 'Generating teams...',
+            searchedName: '',
+            searchedPlayers: []
         }
 
         this.toggle = this.toggle.bind(this)
@@ -67,6 +69,19 @@ class Dashboard extends Component {
         const name = target.name
         const value = target.value
         this.setState({ [name]: value })
+        if (name === "searchedName") {
+            this.searchPlayers(value)
+        }
+    }
+
+    searchPlayers(name) {
+        const players = this.props.players.filter(player => {
+            const wholeName = (player.firstName + ' ' + player.lastName).toLowerCase()
+            if (wholeName.includes(name.toLowerCase())) {
+                return player
+            }
+        })
+        this.state.searchedPlayers = players
     }
 
     addTeam(event) {
@@ -82,7 +97,6 @@ class Dashboard extends Component {
     // method to create balanced teams
     createTeams(group) {
         this.setState({ isLoading: true })
-
         // create Team obj
         class Team {
             group = group
@@ -136,6 +150,7 @@ class Dashboard extends Component {
             if (this.teamNum >= numOfTeams) {
                 this.teamNum = 0
             }
+            group[i].drafted = true
             this.teams[this.teamNum].players.push(group[i])
             this.teamNum++
         }
@@ -201,12 +216,33 @@ class Dashboard extends Component {
                     <Row className="pt-5">
                         <Col className="players-list-container">
                             <h3>Player List</h3>
-                            {this.props.players ?
-                                <ListGroup flush className="w-100">
-                                    <PlayerList players={this.props.players} />
-                                </ListGroup>
+                            <Row className="form-group">
+                                <Col md="6">
+                                    <label>Search Players</label>
+                                    <input type="text" name="searchedName" className="form-control" placeHolder="Search" onChange={this.handleChange}></input>
+                                </Col>
+                            </Row>
+                            {this.state.searchedName.length < 1 ?
+                                <div>
+                                    {this.props.players ?
+                                        <ListGroup flush className="w-100">
+                                            <PlayerList players={this.props.players} />
+                                        </ListGroup>
+                                        :
+                                        <div>No Players to display</div>
+                                    }
+                                </div>
                                 :
-                                <div>No Players to display</div>
+                                <div>{this.state.searchedPlayers.length > 0 ?
+                                    <ListGroup flush className="w-100">
+                                        <PlayerList players={this.state.searchedPlayers} />
+                                    </ListGroup>
+                                    :
+                                    <>
+                                        No players matched
+                                    </>
+                                }
+                                </div>
                             }
                         </Col>
                         {/* <Col md="6" className="pl-md-3 coaches-list-container">
@@ -255,6 +291,9 @@ class Dashboard extends Component {
                                     </Col>
                                 )
                             })}
+                        </Row>
+                        <Row>
+                            {/* Undrafted player list here */}
                         </Row>
                     </Container>}
                 {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}

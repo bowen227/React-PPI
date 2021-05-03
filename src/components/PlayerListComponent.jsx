@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 
 class PlayerList extends Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class PlayerList extends Component {
     render() {
         const player = this.props.players.map(player => {
             return (
-                <Link key={player.id} className="list-group-item player-list" to={`/playerDetails/${player.id}`}>
+                <Link key={player.id} className="list-group-item player-list border-none border-bottom" to={`/playerDetails/${player.id}`}>
                     <div className="row justify-content-center p-1">
                         <div className="col-xs-2">
                             <img className="default-user-img" src="./assets/images/default_user.png" alt="player profile image"></img>
@@ -34,7 +35,9 @@ class PlayerList extends Component {
             );
         });
         return (
-            <>{player}</>
+            <>
+                {player}
+            </>
         );
     }
 }
