@@ -24,13 +24,17 @@ const mapStateToProps = state => {
         association: "Hixson Youth Association",
         teamName: state.teamName,
         league: state.league,
-        teams: state.teams
+        teams: state.teams,
+        six: state.players.filter(player => player.group === "6U"),
+        eight: state.players.filter(player => player.group === "8U"),
+        ten: state.players.filter(player => player.group === "10U"),
+        twelve: state.players.filter(player => player.group === "12U")
     }
 }
 
 const mapDispatchToProps = {
     addPlayer: (firstName, lastName, throws, bats, group) => (addPlayer(firstName, lastName, throws, bats, group)),
-    createTeams: (teams) => (createTeams(teams))
+    createTeams: (teams) => (createTeams(teams)),
 }
 
 class Dashboard extends Component {
@@ -49,7 +53,11 @@ class Dashboard extends Component {
             isLoading: false,
             loadingMessage: 'Generating teams...',
             searchedName: '',
-            searchedPlayers: []
+            searchedPlayers: [],
+            sixYouthList: this.props.six,
+            eightYouthList: this.props.eight,
+            tenYouthList: this.props.ten,
+            twelveYouthList: this.props.twelve
         }
 
         this.toggle = this.toggle.bind(this)
@@ -210,6 +218,20 @@ class Dashboard extends Component {
                     <button name="cModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
                         {/* {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'} */}
                         Add Coach <span class="badge bg-secondary text-white">{this.props.coaches.length}</span>
+                    </button>
+                </Row>
+                <Row>
+                    <button className="btn btn-outline-dark m-2">6U
+                        <span className="badge bg-secondary text-white ml-2">{this.state.sixYouthList.length}</span>
+                    </button>
+                    <button className="btn btn-outline-dark m-2">8U
+                        <span className="badge bg-secondary text-white ml-2">{this.state.eightYouthList.length}</span>
+                    </button>
+                    <button className="btn btn-outline-dark m-2">10U
+                        <span className="badge bg-secondary text-white ml-2">{this.state.tenYouthList.length}</span>
+                    </button>
+                    <button className="btn btn-outline-dark m-2">12U
+                        <span className="badge bg-secondary text-white ml-2">{this.state.twelveYouthList.length}</span>
                     </button>
                 </Row>
                 {this.props.teams.length === 0 ?
