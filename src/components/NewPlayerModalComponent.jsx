@@ -1,8 +1,12 @@
 import { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addPlayer } from '../redux/ActionCreators';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
 
+const mapDispatchToProps = {
+    addPlayer: (firstName, lastName, throws, bats, group) => (addPlayer(firstName, lastName, throws, bats, group)),
+}
 class NewPlayer extends Component {
     constructor(props) {
         super(props);
@@ -21,10 +25,9 @@ class NewPlayer extends Component {
     }
 
     newPlayer(event) {
-        event.preventDefault()
-        this.props.toggle(event)
-
         this.props.addPlayer(this.state.firstName, this.state.lastName, this.state.throws, this.state.bats, this.state.group, this.state.evaluations)
+
+        this.props.toggle(event)
     }
 
     handleChange(event) {
@@ -87,12 +90,12 @@ class NewPlayer extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addNewPlayer: (payload) => {
-            dispatch({ type: "ADDED_PLAYER", payload: payload })
-        }
-    }
-}
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         addNewPlayer: (payload) => {
+//             dispatch({ type: "ADDED_PLAYER", payload: payload })
+//         }
+//     }
+// }
 
 export default withRouter(connect(null, mapDispatchToProps)(NewPlayer));

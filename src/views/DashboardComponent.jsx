@@ -6,10 +6,7 @@ import {
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-// import Schedule from '../components/ScheduleComponent';
 import PlayerList from '../components/PlayerListComponent';
-// import NewEvent from '../components/NewEventModalComponent';
-// import CoachList from '../components/CoachListComponent';
 import NewPlayer from '../components/NewPlayerModalComponent';
 import { addPlayer, createTeams } from '../redux/ActionCreators';
 import NewCoach from '../components/NewCoachModalComponent';
@@ -33,8 +30,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    addPlayer: (firstName, lastName, throws, bats, group) => (addPlayer(firstName, lastName, throws, bats, group)),
-    createTeams: (teams) => (createTeams(teams)),
+    createTeams: (teams) => (createTeams(teams))
 }
 
 class Dashboard extends Component {
@@ -53,11 +49,7 @@ class Dashboard extends Component {
             isLoading: false,
             loadingMessage: 'Generating teams...',
             searchedName: '',
-            searchedPlayers: [],
-            sixYouthList: this.props.six,
-            eightYouthList: this.props.eight,
-            tenYouthList: this.props.ten,
-            twelveYouthList: this.props.twelve
+            searchedPlayers: []
         }
 
         this.toggle = this.toggle.bind(this)
@@ -149,6 +141,7 @@ class Dashboard extends Component {
         }, 3000);
     }
 
+    // used for filterPlayers loop
     teamNum = 0
 
     // add players to teams
@@ -200,17 +193,6 @@ class Dashboard extends Component {
                             <button className="btn btn-outline-danger" onClick={() => this.createTeams('6U')}>Draft 6U Players</button>
                             :
                             <div></div>}
-                        {/* <Row>
-                            <Col>
-                                <h3>Upcoming Events</h3>
-                            </Col>
-                            <Col>
-                                <Button name="eModal" onClick={this.toggle}>Add Event</Button>
-                            </Col>
-                        </Row> */}
-                        {/* <ListGroup flush >
-                            <Schedule schedule={this.props.schedule} />
-                        </ListGroup> */}
                     </Col>
                 </Row>
                 <Row className="d-flex">
@@ -224,16 +206,16 @@ class Dashboard extends Component {
                 </Row>
                 <Row>
                     <button className="btn btn-outline-dark m-2">6U
-                        <span className="badge bg-secondary text-white ml-2">{this.state.sixYouthList.length}</span>
+                        <span className="badge bg-secondary text-white ml-2">{this.props.six.length}</span>
                     </button>
                     <button className="btn btn-outline-dark m-2">8U
-                        <span className="badge bg-secondary text-white ml-2">{this.state.eightYouthList.length}</span>
+                        <span className="badge bg-secondary text-white ml-2">{this.props.eight.length}</span>
                     </button>
                     <button className="btn btn-outline-dark m-2">10U
-                        <span className="badge bg-secondary text-white ml-2">{this.state.tenYouthList.length}</span>
+                        <span className="badge bg-secondary text-white ml-2">{this.props.ten.length}</span>
                     </button>
                     <button className="btn btn-outline-dark m-2">12U
-                        <span className="badge bg-secondary text-white ml-2">{this.state.twelveYouthList.length}</span>
+                        <span className="badge bg-secondary text-white ml-2">{this.props.twelve.length}</span>
                     </button>
                 </Row>
                 {this.props.teams.length === 0 ?
@@ -250,7 +232,7 @@ class Dashboard extends Component {
                                 <div>
                                     {this.props.players ?
                                         <ListGroup flush className="w-100">
-                                            <PlayerList players={this.props.players} />
+                                            <PlayerList players={this.props.players.filter(player => (player.id > this.props.players.length - 11))} />
                                         </ListGroup>
                                         :
                                         <div>No Players to display</div>
@@ -269,16 +251,6 @@ class Dashboard extends Component {
                                 </div>
                             }
                         </Col>
-                        {/* <Col md="6" className="pl-md-3 coaches-list-container">
-                            <h3>Coaches List</h3>
-                            {this.state.coaches ?
-                                <ListGroup flush className="w-100">
-                                    <CoachList coaches={this.state.coaches} />
-                                </ListGroup>
-                                :
-                                <div>No Coaches to display</div>
-                        }
-                        </Col> */}
                     </Row>
                     :
                     <Container>
@@ -320,8 +292,7 @@ class Dashboard extends Component {
                             {/* Undrafted player list here */}
                         </Row>
                     </Container>}
-                {/* <NewEvent toggle={this.toggle} isOpen={this.state.eModal} /> */}
-                <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} addPlayer={this.props.addPlayer} />
+                <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
                 <NewCoach toggle={this.toggle} isOpen={this.state.cModal} />
                 <SelectCoach toggle={this.toggle} isOpen={this.state.sModal} teamNumber={this.state.teamNumber} />
             </Container>
