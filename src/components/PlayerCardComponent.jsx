@@ -7,6 +7,7 @@ class PlayerCard extends Component {
     }
 
     render() {
+        // const renderPpi = Object.values(this.props.player.evaluations[this.props.player.evaluations.length - 1])
         return (
             <Card>
                 <CardHeader>
@@ -42,7 +43,15 @@ class PlayerCard extends Component {
                         <Col>{this.props.player.group}</Col>
                         <Col>{this.props.player.bats}</Col>
                         <Col>{this.props.player.throws}</Col>
-                        <Col>0.00</Col>
+                        <Col>{this.props.player.evaluations.length > 0 ? 
+                            <span>
+                                {/* {(renderPpi.splice(0, renderPpi.length - 1).reduce((c, n) => c + +n, 0) / 16).toFixed(2)} */}
+                                {this.props.player.ppi}
+                            </span>
+                            :
+                            <span>Not rated</span>
+                            }
+                        </Col>
                     </Row>
                 </CardBody>
             </Card>

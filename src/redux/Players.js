@@ -10,7 +10,8 @@ export const Players = (state = PLAYERS, action) => {
                 }
                 return {
                     ...item,
-                    evaluations: item.evaluations.concat(action.payload.evaluation)
+                    evaluations: item.evaluations.concat(action.payload.evaluation),
+                    ppi: action.payload.calcPpi
                 }
             })
         case "ADD_PLAYER":

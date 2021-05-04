@@ -5,7 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, I
 import { evalPlayer } from '../redux/ActionCreators';
 
 const mapDispatchToProps = {
-    evalPlayer: (player, evaluation) => (evalPlayer(player, evaluation))
+    evalPlayer: (player, evaluation, calcPpi) => (evalPlayer(player, evaluation, calcPpi))
 }
 
 const mapStateToProps = state => {
@@ -52,7 +52,9 @@ class EvalModal extends Component {
     addEval() {
         const player = this.props.players[this.props.player - 1]
         const newEval = this.state
-        this.props.evalPlayer(player, newEval)
+        const evalObj = Object.values(newEval)
+        const calcPpi = (evalObj.splice(0, evalObj.length - 1).reduce((c, n) => c + +n, 0) / 16).toFixed(2)
+        this.props.evalPlayer(player, newEval, calcPpi)
     }
 
     render() {

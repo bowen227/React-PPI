@@ -25,7 +25,9 @@ const mapStateToProps = state => {
         six: state.players.filter(player => player.group === "6U"),
         eight: state.players.filter(player => player.group === "8U"),
         ten: state.players.filter(player => player.group === "10U"),
-        twelve: state.players.filter(player => player.group === "12U")
+        twelve: state.players.filter(player => player.group === "12U"),
+        undrafted: state.players.filter(player => !player.drafted),
+        needsEval: state.players.filter(player => player.ppi === 0)
     }
 }
 
@@ -72,10 +74,23 @@ class Dashboard extends Component {
         if (name === "searchedName") {
             this.searchPlayers(value)
         }
+        if (name === "undraftedSearch") {
+            this.searchUndrafted(value)
+        }
     }
 
     searchPlayers(name) {
         const players = this.props.players.filter(player => {
+            const wholeName = (player.firstName + ' ' + player.lastName).toLowerCase()
+            if (wholeName.includes(name.toLowerCase())) {
+                return player
+            }
+        })
+        this.state.searchedPlayers = players
+    }
+
+    searchUndrafted(name) {
+        const players = this.props.undrafted.filter(player => {
             const wholeName = (player.firstName + ' ' + player.lastName).toLowerCase()
             if (wholeName.includes(name.toLowerCase())) {
                 return player
@@ -96,7 +111,15 @@ class Dashboard extends Component {
 
     // method to create balanced teams
     createTeams(group) {
+        // all players need to be evaled
+        if (this.props.needsEval.length > 0) {
+            alert("All players need to be evaluated before creating teams")
+            return
+        }
+
+        // if good to eval setloading to true
         this.setState({ isLoading: true })
+
         // create Team obj
         class Team {
             group = group
@@ -170,7 +193,7 @@ class Dashboard extends Component {
             return (
                 <div className="generator-loading">
                     <div className="p-5">
-                        <div class="spinner-border text-dark p-5" role="status">
+                        <div className="spinner-border text-dark p-5" role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
                     </div>
@@ -201,7 +224,7 @@ class Dashboard extends Component {
                     </button>
                     <button name="cModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
                         {/* {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'} */}
-                        Add Coach <span class="badge bg-secondary text-white">{this.props.coaches.length}</span>
+                        Add Coach <span className="badge bg-secondary text-white">{this.props.coaches.length}</span>
                     </button>
                 </Row>
                 <Row>
@@ -218,6 +241,9 @@ class Dashboard extends Component {
                         <span className="badge bg-secondary text-white ml-2">{this.props.twelve.length}</span>
                     </button>
                 </Row>
+                <Row>
+                    <h5>Players not evaluated: <strong>{this.props.needsEval.length}</strong></h5>
+                </Row>
                 {this.props.teams.length === 0 ?
                     <Row className="pt-5">
                         <Col className="players-list-container">
@@ -225,14 +251,14 @@ class Dashboard extends Component {
                             <Row className="form-group">
                                 <Col md="6">
                                     <label>Search Players</label>
-                                    <input type="text" name="searchedName" className="form-control" placeHolder="Search" onChange={this.handleChange}></input>
+                                    <input type="text" name="searchedName" className="form-control" placeholder="Search" onChange={this.handleChange}></input>
                                 </Col>
                             </Row>
                             {this.state.searchedName.length < 1 ?
                                 <div>
                                     {this.props.players ?
                                         <ListGroup flush className="w-100">
-                                            <PlayerList players={this.props.players.filter(player => (player.id > this.props.players.length - 11))} />
+                                            <PlayerList players={this.props.needsEval.filter(player => (player.id > this.props.needsEval.length - 10))} />
                                         </ListGroup>
                                         :
                                         <div>No Players to display</div>
@@ -253,51 +279,74 @@ class Dashboard extends Component {
                         </Col>
                     </Row>
                     :
-                    <Container>
+                    <>
                         <Row>
-                            {this.props.teams.map(team => {
-                                return (
-                                    <Col className="p-1 team-cards" md="4" key={team.teamNumber}>
-                                        <Card className="shadow">
-                                            <CardHeader>
-                                                <h4>{team.name ? team.name : `Team: ${team.teamNumber}`}</h4>
-                                                <span>
-                                                    Coaches: {team.headCoach ? team.headCoach.lastName : "__"},{" "}
-                                                    {team.assistant ? team.assistant.lastName : "__"}
-                                                </span>
-                                            </CardHeader>
-                                            <CardBody>
-                                                <Row>
-                                                    <Col>
-                                                        <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
-                                                    </Col>
-                                                    <Col>
-                                                        <h5>Group: {team.group}</h5>
-                                                    </Col>
-                                                </Row>
-                                                <h5>Players: {team.players.length}</h5>
-                                                <button name="sModal" className="btn btn-outline-dark" onClick={() => this.assignCoach(team.teamNumber)}>Assign Coach</button>
-                                            </CardBody>
-                                            <CardFooter>
-                                                <div className="nav-link nav-item text-center">
-                                                    <Link className="text-dark" to={`/teamDetails/${team.teamNumber}`}>Go to details</Link>
-                                                </div>
-                                            </CardFooter>
-                                        </Card>
-                                    </Col>
-                                )
-                            })}
+                            <RenderTeam teams={this.props.teams} />
                         </Row>
+                        {/* NEED TO FIX BELOW SEARCH ETC.... */}
+                        <div className="mt-3">
+                            <h3>Undrafted Players</h3>
+                        </div>
                         <Row>
-                            {/* Undrafted player list here */}
+                            <Row className="form-group">
+                                <Col md="6">
+                                    <label>Search Players</label>
+                                    <input type="text" name="undraftedSearch" className="form-control" placeholder="Search" onChange={this.handleChange}></input>
+                                </Col>
+                            </Row>
+                            {this.state.searchUndrafted.length > 0 ? 
+                            <ListGroup flush className="w-100">
+                                <PlayerList players={this.props.undrafted} />
+                            </ListGroup>
+                            :
+                            <>
+                                No players matched
+                            </>
+                            }
                         </Row>
-                    </Container>}
+                    </>}
                 <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
                 <NewCoach toggle={this.toggle} isOpen={this.state.cModal} />
                 <SelectCoach toggle={this.toggle} isOpen={this.state.sModal} teamNumber={this.state.teamNumber} />
             </Container>
         )
     }
+}
+
+function RenderTeam({ teams }) {
+    const renderTeam = teams.map(team => {
+        return (
+            <Col className="p-1 team-cards" md="4" key={team.teamNumber}>
+                <Card className="shadow">
+                    <CardHeader>
+                        <h4>{team.name ? team.name : `Team: ${team.teamNumber}`}</h4>
+                        <span>
+                            Coaches: {team.headCoach ? team.headCoach.lastName : "__"},{" "}
+                            {team.assistant ? team.assistant.lastName : "__"}
+                        </span>
+                    </CardHeader>
+                    <CardBody>
+                        <Row>
+                            <Col>
+                                <h5>PPI: {team.players.reduce((c, n) => c + Math.round(n.ppi), 0)}</h5>
+                            </Col>
+                            <Col>
+                                <h5>Group: {team.group}</h5>
+                            </Col>
+                        </Row>
+                        <h5>Players: {team.players.length}</h5>
+                        <button name="sModal" className="btn btn-outline-dark" onClick={() => this.assignCoach(team.teamNumber)}>Assign Coach</button>
+                    </CardBody>
+                    <CardFooter>
+                        <div className="nav-link nav-item text-center">
+                            <Link className="text-dark" to={`/teamDetails/${team.teamNumber}`}>Go to details</Link>
+                        </div>
+                    </CardFooter>
+                </Card>
+            </Col>
+        )
+    })
+    return renderTeam
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

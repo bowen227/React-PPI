@@ -16,7 +16,6 @@ class PastEvals extends Component {
 
     render() {
         const player = this.props.players.filter(player => player.id === this.props.playerId)[0]
-        console.log(player)
         return (
             <Card>
                 <CardHeader>Past Evals</CardHeader>

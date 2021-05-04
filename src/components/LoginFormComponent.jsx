@@ -24,7 +24,6 @@ function LoginForm(props) {
             type: type
         }
         localStorage.setItem("user", JSON.stringify(u))
-        console.log(name + ' ' + type)
         props.login()
     }
     return (

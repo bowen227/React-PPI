@@ -12,11 +12,12 @@ export const addPlayer = (firstName, lastName, throws, bats, group, evaluations)
     }
 })
 
-export const evalPlayer = (player, evaluation) => ({
+export const evalPlayer = (player, evaluation, calcPpi) => ({
     type: ActionTypes.EVAL_PLAYER,
     payload: {
         player,
-        evaluation
+        evaluation,
+        calcPpi
     }
 })
 

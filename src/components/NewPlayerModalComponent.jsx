@@ -7,6 +7,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 const mapDispatchToProps = {
     addPlayer: (firstName, lastName, throws, bats, group) => (addPlayer(firstName, lastName, throws, bats, group)),
 }
+
 class NewPlayer extends Component {
     constructor(props) {
         super(props);
