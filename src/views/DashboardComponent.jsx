@@ -207,27 +207,29 @@ class Dashboard extends Component {
                     <Col className="py-3" md="8">
                         <h2>{this.props.user.type === 'association' ? `${this.props.user.name}` : `${this.props.user.name}`}</h2>
                         <h2>{this.props.association ? this.props.association : 'No association selected'}</h2>
-                        <div>
-                            {this.props.coaches.map(coach => <div>{coach.firstName}</div>)}
-                        </div>
                     </Col>
                     <Col className="py-3">
                         {this.props.teams.length === 0 ?
-                            <button className="btn btn-outline-danger" onClick={() => this.createTeams('6U')}>Draft 6U Players</button>
+                            <div className="d-flex flex-column">
+                                <button className="btn btn-outline-danger" onClick={() => this.createTeams('6U')}>Draft 6U Players</button>
+                                <button className="btn btn-outline-danger mt-1" onClick={() => this.createTeams('8U')}>Draft 8U Players</button>
+                                <button className="btn btn-outline-danger mt-1" onClick={() => this.createTeams('10U')}>Draft 10U Players</button>
+                                <button className="btn btn-outline-danger mt-1" onClick={() => this.createTeams('12U')}>Draft 12U Players</button>
+                            </div>
                             :
                             <div></div>}
                     </Col>
                 </Row>
                 <Row className="d-flex">
-                    <button name="pModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
+                    <button name="pModal" className="btn btn-outline-dark mx-2" onClick={this.toggle}>
                         Add Player <span className="badge bg-secondary text-white">{this.props.players.length}</span>
                     </button>
-                    <button name="cModal" className="btn btn-outline-dark m-2" onClick={this.toggle}>
+                    <button name="cModal" className="btn btn-outline-dark mx-2" onClick={this.toggle}>
                         {/* {this.props.user.type === 'association' ? 'Add Coach' : 'Add Assistant'} */}
                         Add Coach <span className="badge bg-secondary text-white">{this.props.coaches.length}</span>
                     </button>
                 </Row>
-                <Row className="mt-2">
+                <Row>
                     <h5 className="m-2">Total players not evaluated: <strong>{this.props.needsEval.length}</strong></h5>
                 </Row>
                 <Row>
