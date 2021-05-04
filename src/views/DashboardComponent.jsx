@@ -22,10 +22,10 @@ const mapStateToProps = state => {
         teamName: state.teamName,
         league: state.league,
         teams: state.teams,
-        six: state.players.filter(player => player.group === "6U"),
-        eight: state.players.filter(player => player.group === "8U"),
-        ten: state.players.filter(player => player.group === "10U"),
-        twelve: state.players.filter(player => player.group === "12U"),
+        six: state.players.filter(player => player.group === "6U" && player.ppi === 0),
+        eight: state.players.filter(player => player.group === "8U" && player.ppi === 0),
+        ten: state.players.filter(player => player.group === "10U" && player.ppi === 0),
+        twelve: state.players.filter(player => player.group === "12U" && player.ppi === 0),
         undrafted: state.players.filter(player => !player.drafted),
         needsEval: state.players.filter(player => player.ppi === 0)
     }
@@ -227,6 +227,9 @@ class Dashboard extends Component {
                         Add Coach <span className="badge bg-secondary text-white">{this.props.coaches.length}</span>
                     </button>
                 </Row>
+                <Row className="mt-2">
+                    <h5 className="m-2">Total players not evaluated: <strong>{this.props.needsEval.length}</strong></h5>
+                </Row>
                 <Row>
                     <button className="btn btn-outline-dark m-2">6U
                         <span className="badge bg-secondary text-white ml-2">{this.props.six.length}</span>
@@ -240,9 +243,6 @@ class Dashboard extends Component {
                     <button className="btn btn-outline-dark m-2">12U
                         <span className="badge bg-secondary text-white ml-2">{this.props.twelve.length}</span>
                     </button>
-                </Row>
-                <Row>
-                    <h5>Players not evaluated: <strong>{this.props.needsEval.length}</strong></h5>
                 </Row>
                 {this.props.teams.length === 0 ?
                     <Row className="pt-5">
