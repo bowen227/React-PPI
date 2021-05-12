@@ -402,31 +402,16 @@ class Dashboard extends Component {
                 twelveUTeams={this.props.twelveUTeams}
               />
             </Row>
-            {/* NEED TO FIX BELOW SEARCH ETC.... */}
-            {/* <div className="mt-3">
-              <h3>Undrafted Players</h3>
-            </div>
-            <Row>
-              <Row className="form-group">
-                <Col md="6">
-                  <label>Search Players</label>
-                  <input
-                    type="text"
-                    name="undraftedSearch"
-                    className="form-control"
-                    placeholder="Search"
-                    onChange={this.handleChange}
-                  ></input>
-                </Col>
-              </Row>
-              {this.state.searchUndrafted.length > 0 ? (
-                <ListGroup flush className="w-100">
-                  <PlayerList players={this.props.undrafted} />
-                </ListGroup>
-              ) : (
-                <>No players matched</>
-              )}
-            </Row> */}
+            <Row className="mt-4">
+              <Col>
+                <h3>Players needing evals</h3>
+                <PlayerList
+                  players={this.props.needsEval.filter(
+                    (player) => player.id > this.props.needsEval.length - 10
+                  )}
+                />
+              </Col>
+            </Row>
           </>
         )}
         <NewPlayer toggle={this.toggle} isOpen={this.state.pModal} />
